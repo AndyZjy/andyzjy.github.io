@@ -3,19 +3,35 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Jerome Blog</title>
+  <title>Lerna初探 | Jerome Blog</title>
 
   <!-- keywords -->
   
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Jerome Blog">
-<meta property="og:url" content="http://example.com/index.html">
+  <meta name="description" content="1、简介 首先是关于Monorepo（一篇不错的介绍Monorepo的文章），它是管理项目代码的一种方式，主要手段是通过在一个项目仓库中管理多个模块&#x2F;仓库包。而Multirepo是传统的仓库管理方法，也是公司目前所用的方法，即所有的项目包都是独立仓库部署和管理。两种方式对比如下：  两种方式进行对比的话，千人千面。前者允许多元化发展（各项目可以有自己的构建工具、依赖管理策略、单元测试方法），后者希">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Lerna初探">
+<meta property="og:url" content="http://example.com/2020/12/11/lerna/index.html">
 <meta property="og:site_name" content="Jerome Blog">
+<meta property="og:description" content="1、简介 首先是关于Monorepo（一篇不错的介绍Monorepo的文章），它是管理项目代码的一种方式，主要手段是通过在一个项目仓库中管理多个模块&#x2F;仓库包。而Multirepo是传统的仓库管理方法，也是公司目前所用的方法，即所有的项目包都是独立仓库部署和管理。两种方式对比如下：  两种方式进行对比的话，千人千面。前者允许多元化发展（各项目可以有自己的构建工具、依赖管理策略、单元测试方法），后者希">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2020/png/346819/1594027202685-250efc82-2d70-412a-ad3e-37a6176924d0.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2020/png/346819/1593596823107-795df9a8-9cb2-4044-9c0b-c607dcbe56ec.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2020/png/346819/1593601700780-f6e0fe18-09e2-41e2-ba61-f8f18906edba.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2020/png/346819/1593601850411-91a9fcea-b92c-41a4-9044-0f7ce8a426e0.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2020/png/346819/1593602558875-7c9db360-0811-4a87-93ee-6f6110a41663.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2020/png/346819/1594014883318-d9c11a38-df02-4622-b116-4de45bcd71a4.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2020/png/346819/1594015055046-1d39a385-960c-458d-934a-ff90876f2cfe.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2020/png/346819/1594015212081-24985248-c861-40ae-b47d-8079ebd92f1d.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2020/png/346819/1594015333313-a4fbb6dc-e84b-4493-99b6-2c9c568ba761.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2020/png/346819/1594024317269-03a572de-d7e5-4728-bf62-018a2d8c9cb8.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2020/png/346819/1594025570416-019056ef-444f-43da-a5e8-8d6ccd9c8ada.png">
+<meta property="article:published_time" content="2020-12-11T07:00:55.000Z">
+<meta property="article:modified_time" content="2020-12-11T07:50:37.191Z">
 <meta property="article:author" content="Jerome Zhang">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.nlark.com/yuque/0/2020/png/346819/1594027202685-250efc82-2d70-412a-ad3e-37a6176924d0.png">
   
     <link rel="alternative" href="/atom.xml" title="Jerome Blog" type="application/atom+xml">
   
@@ -203,187 +219,7 @@
 		</header>				
 	</div>
 </nav>
-      <div class="body-wrap">
-  
-    <article id="post-cssFilter" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2020/12/11/cssFilter/" class="article-date">
-  	<time datetime="2020-12-11T07:50:55.000Z" itemprop="datePublished">2020-12-11</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/12/11/cssFilter/">
-        CSS色调旋转滤镜
-        
-      </a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <div class="lake-engine-view lake-typography-traditional">
-<h1 id="pKs9e" data-lake-id="8131c1f47e7cac4295d097acb87aae5c" data-wording="true">一 关于filter</h1>
-<p data-lake-id="231d2493b8b8cb2dbd59d80dfbeb9bc3" data-wording="true">首先看一下官方对于CSS的filter属性的定义：</p>
-<blockquote>
-<p data-lake-id="2a21b3db9bf0bf7c3666d507f5d3de3e" data-wording="true"><span class="lake-fontsize-12">CSS属性将模糊或颜色偏移等图形效果应用于元素。滤镜通常用于调整图像，背景和边框的渲染。</span></p>
-</blockquote>
-<p data-lake-id="b047d0b8615fd6ec5546f663bad33fa1" data-wording="true">本文主要讲的是filter中的一个属性：hue-rotate。官方定义是：</p>
-<blockquote>
-<p data-lake-id="86a5f9375381429a99d93656b34c6a12" data-wording="true">给图像应用色相旋转。&ldquo;angle&rdquo;一值设定图像会被调整的色环角度值。值为0deg，则图像无变化。若值未设置，默认值是0deg。该值虽然没有最大值，超过360deg的值相当于又绕一圈。</p>
-</blockquote>
-<p data-lake-id="a54ab0153db832d856612c7bec51dfc6" data-wording="true">本文主要是通过一些demo和思考来讲述其强大和便捷之处。</p>
-<h1 id="jHJtu" data-lake-id="877e8474595c6d65a970614441a27ca0" data-wording="true">二 代码差异</h1>
-<p data-lake-id="3ab4c150bb17b9051ff05f39504ce760" data-wording="true">首先来写一个带有hover特效的button组件吧～代码如下：</p>
-<div id="64cTH" class="lake-card-margin" data-card-type="block" data-lake-card="codeblock" data-card-value="data:%7B%22mode%22%3A%22html%22%2C%22code%22%3A%22%3Cbutton%20class%3D%5C%22btn%20btn-primary%5C%22%3Eprimary%3C%2Fbutton%3E%5Cn%3Cbutton%20class%3D%5C%22btn%20btn-primary-filter%5C%22%3Eprimary-filter%3C%2Fbutton%3E%22%2C%22heightLimit%22%3Atrue%2C%22margin%22%3Atrue%2C%22id%22%3A%2264cTH%22%7D" data-language="html">
-<div class="lake-codeblock-content">
-<div class="CodeMirror-sizer">
-<pre class="cm-s-default"><span class="lake-preview-line"><span class="lake-preview-line-number lake-lm-pad-level-0"><span class="lake-preview-codeblock-content"><span class="cm-tag cm-bracket">&lt;<span class="cm-tag">button <span class="cm-attribute">class=<span class="cm-string">"btn btn-primary"<span class="cm-tag cm-bracket">&gt;primary<span class="cm-tag cm-bracket">&lt;/<span class="cm-tag">button<span class="cm-tag cm-bracket">&gt;
-<span class="lake-preview-line"><span class="lake-preview-line-number lake-lm-pad-level-0"><span class="lake-preview-codeblock-content"><span class="cm-tag cm-bracket">&lt;<span class="cm-tag">button <span class="cm-attribute">class=<span class="cm-string">"btn btn-primary-filter"<span class="cm-tag cm-bracket">&gt;primary-filter<span class="cm-tag cm-bracket">&lt;/<span class="cm-tag">button<span class="cm-tag cm-bracket">&gt;</span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></pre>
-</div>
-</div>
-</div>
-<div id="QDkKA" class="lake-card-margin" data-card-type="block" data-lake-card="codeblock" data-card-value="data:%7B%22mode%22%3A%22css%22%2C%22code%22%3A%22.btn%7B%5Cn%20%20padding%3A%204px%2015px%3B%5Cn%20%20outline%3A%20none%3B%5Cn%20%20border%3A%20none%3B%5Cn%20%20border-radius%3A%203px%3B%5Cn%20%20margin%3A%2010px%2020px%3B%5Cn%20%20cursor%3A%20pointer%3B%5Cn%20%20color%3A%20%23fff%3B%5Cn%20%20background%3A%20%231890ff%3B%5Cn%20%20border-color%3A%20%231890ff%3B%5Cn%20%20box-shadow%3A%200%202px%200%20rgba(0%2C0%2C0%2C.045)%3B%5Cn%7D%5Cn.btn-primary%3Ahover%7B%5Cn%20%20background-color%3A%20%23096dd9%3B%5Cn%20%20border-color%3A%20%23096dd9%3B%5Cn%20%20color%3A%20%23fff%3B%20%5Cn%7D%5Cn.btn-primary-filter%3Ahover%7B%5Cn%20%20filter%3A%20hue-rotate(15deg)%3B%5Cn%7D%22%2C%22heightLimit%22%3Atrue%2C%22margin%22%3Atrue%2C%22id%22%3A%22QDkKA%22%7D" data-language="css">
-<div class="lake-codeblock-content">
-<div class="CodeMirror-sizer">
-<pre class="cm-s-default"><span class="lake-preview-line"><span class="lake-preview-line-number lake-lm-pad-level-1"><span class="lake-preview-codeblock-content"><span class="cm-qualifier">.btn{
-<span class="lake-preview-line"><span class="lake-preview-line-number lake-lm-pad-level-1"><span class="lake-preview-codeblock-content">  <span class="cm-property">padding: <span class="cm-number">4px <span class="cm-number">15px;
-<span class="lake-preview-line"><span class="lake-preview-line-number lake-lm-pad-level-1"><span class="lake-preview-codeblock-content">  <span class="cm-property">outline: <span class="cm-atom">none;
-<span class="lake-preview-line"><span class="lake-preview-line-number lake-lm-pad-level-1"><span class="lake-preview-codeblock-content">  <span class="cm-property">border: <span class="cm-atom">none;
-<span class="lake-preview-line"><span class="lake-preview-line-number lake-lm-pad-level-1"><span class="lake-preview-codeblock-content">  <span class="cm-property">border-radius: <span class="cm-number">3px;
-<span class="lake-preview-line"><span class="lake-preview-line-number lake-lm-pad-level-1"><span class="lake-preview-codeblock-content">  <span class="cm-property">margin: <span class="cm-number">10px <span class="cm-number">20px;
-<span class="lake-preview-line"><span class="lake-preview-line-number lake-lm-pad-level-1"><span class="lake-preview-codeblock-content">  <span class="cm-property">cursor: <span class="cm-atom">pointer;
-<span class="lake-preview-line"><span class="lake-preview-line-number lake-lm-pad-level-1"><span class="lake-preview-codeblock-content">  <span class="cm-property">color: <span class="cm-atom">#fff;
-<span class="lake-preview-line"><span class="lake-preview-line-number lake-lm-pad-level-1"><span class="lake-preview-codeblock-content">  <span class="cm-property">background: <span class="cm-atom">#1890ff;
-<span class="lake-preview-line"><span class="lake-preview-line-number lake-lm-pad-level-0"><span class="lake-preview-codeblock-content">  <span class="cm-property">border-color: <span class="cm-atom">#1890ff;
-<span class="lake-preview-line"><span class="lake-preview-line-number lake-lm-pad-level-0"><span class="lake-preview-codeblock-content">  <span class="cm-property">box-shadow: <span class="cm-number">0 <span class="cm-number">2px <span class="cm-number">0 <span class="cm-atom">rgba(<span class="cm-number">0,<span class="cm-number">0,<span class="cm-number">0,<span class="cm-number">.045);
-<span class="lake-preview-line"><span class="lake-preview-line-number lake-lm-pad-level-0"><span class="lake-preview-codeblock-content">}
-<span class="lake-preview-line"><span class="lake-preview-line-number lake-lm-pad-level-0"><span class="lake-preview-codeblock-content"><span class="cm-qualifier">.btn-primary:<span class="cm-variable-3">hover{
-<span class="lake-preview-line"><span class="lake-preview-line-number lake-lm-pad-level-0"><span class="lake-preview-codeblock-content">  <span class="cm-property">background-color: <span class="cm-atom">#096dd9;
-<span class="lake-preview-line"><span class="lake-preview-line-number lake-lm-pad-level-0"><span class="lake-preview-codeblock-content">  <span class="cm-property">border-color: <span class="cm-atom">#096dd9;
-<span class="lake-preview-line"><span class="lake-preview-line-number lake-lm-pad-level-0"><span class="lake-preview-codeblock-content">  <span class="cm-property">color: <span class="cm-atom">#fff; 
-<span class="lake-preview-line"><span class="lake-preview-line-number lake-lm-pad-level-0"><span class="lake-preview-codeblock-content">}
-<span class="lake-preview-line"><span class="lake-preview-line-number lake-lm-pad-level-0"><span class="lake-preview-codeblock-content"><span class="cm-qualifier">.btn-primary-filter:<span class="cm-variable-3">hover{
-<span class="lake-preview-line"><span class="lake-preview-line-number lake-lm-pad-level-0"><span class="lake-preview-codeblock-content">  <span class="cm-property">filter: <span class="cm-variable">hue-rotate(<span class="cm-number">15deg);
-<span class="lake-preview-line"><span class="lake-preview-line-number lake-lm-pad-level-0"><span class="lake-preview-codeblock-content">}</span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></pre>
-</div>
-</div>
-</div>
-<p data-lake-id="76d1f3713108cd4d80450d5ad4f9f7ac" data-wording="true">效果如下：</p>
-<p data-lake-id="76d1f3713108cd4d80450d5ad4f9f7ac" data-wording="true"><img src="https://i.loli.net/2020/12/01/CG3pI65XRWOrNA4.gif" /></p>
-<p data-lake-id="1ec8dacfa7b1464b7e7069a9ecc2b16c" data-wording="true">通过动图可以看到，两个button组件的效果基本类似，但是代码量是有一定的差距的，目前我们只写了hover的特效，当我们加上其余的状态以后，代码量的差距会更大。</p>
-<p data-lake-id="2f0a8a8899edbb59f467f00f41e03980" data-wording="true">开胃菜我们吃的差不多了，我们搞点事情：</p>
-<p data-lake-id="f262f90920d7143568927daedbc6dd84" data-wording="true"><span class="lake-card-margin-top lake-card-margin-bottom" data-card-type="inline" data-lake-card="image" data-card-value="data:%7B%22src%22%3A%22https%3A%2F%2Fcdn.nlark.com%2Fyuque%2F0%2F2020%2Fpng%2F346819%2F1606808183728-184bbe7e-9a88-4e11-8022-0d9d17ca917e.png%22%2C%22originWidth%22%3A640%2C%22originHeight%22%3A640%2C%22name%22%3A%22image.png%22%2C%22size%22%3A216552%2C%22display%22%3A%22inline%22%2C%22align%22%3A%22left%22%2C%22linkTarget%22%3A%22_blank%22%2C%22status%22%3A%22done%22%2C%22ocrLocations%22%3A%5B%7B%22x%22%3A52.997356%2C%22y%22%3A4.588247%2C%22width%22%3A544.5142440000001%2C%22height%22%3A143.689083%2C%22text%22%3A%22%E9%AB%98%E4%BA%8B%E6%83%85%E5%95%8A!%22%7D%5D%2C%22style%22%3A%22none%22%2C%22search%22%3A%22%E9%AB%98%E4%BA%8B%E6%83%85%E5%95%8A!%22%2C%22margin%22%3A%7B%22top%22%3Atrue%2C%22bottom%22%3Atrue%7D%2C%22width%22%3A160%2C%22height%22%3A160%7D"><img src="https://cdn.nlark.com/yuque/0/2020/png/346819/1606808183728-184bbe7e-9a88-4e11-8022-0d9d17ca917e.png" alt="image.png" class="image lake-drag-image" title="image.png" data-role="image" data-raw-src="" data-height="160px" /></span></p>
-<p data-lake-id="01cd0f1175872644f6fe1ea75a1c4f20" data-wording="true">我们经常看到进度条，但是更多时候的动画效果都是通过js实现的，我们这次可以做一个根据进度而时刻变化颜色的进度条，走起走起：</p>
-<p data-lake-id="e9bd95b1e1195047b9ad6e2f74f8b342" data-wording="true">首先我们要有一个进度条：</p>
-<p data-lake-id="f3ee9d53687870445d7d230826edf8ee"><span class="lake-card-margin-top lake-card-margin-bottom" data-card-type="inline" data-lake-card="image" data-card-value="data:%7B%22src%22%3A%22https%3A%2F%2Fcdn.nlark.com%2Fyuque%2F0%2F2020%2Fpng%2F346819%2F1606809717227-3ca954a4-3310-47c1-b9ea-5ebd3da05980.png%22%2C%22originWidth%22%3A1472%2C%22originHeight%22%3A328%2C%22name%22%3A%22image.png%22%2C%22size%22%3A20978%2C%22display%22%3A%22inline%22%2C%22align%22%3A%22left%22%2C%22linkTarget%22%3A%22_blank%22%2C%22status%22%3A%22done%22%2C%22ocrLocations%22%3A%5B%5D%2C%22style%22%3A%22none%22%2C%22search%22%3A%22%22%2C%22margin%22%3A%7B%22top%22%3Atrue%2C%22bottom%22%3Atrue%7D%2C%22width%22%3A736%2C%22height%22%3A164%7D"><img src="https://cdn.nlark.com/yuque/0/2020/png/346819/1606809717227-3ca954a4-3310-47c1-b9ea-5ebd3da05980.png" alt="image.png" class="image lake-drag-image" title="image.png" data-role="image" data-raw-src="" data-height="164px" /></span></p>
-<p data-lake-id="81b10be3180c0c238afdcaae88c79ff1" data-wording="true">其次我们要让它动起来，根据我们的进度保持颜色的递进变化，代码如下：</p>
-<div id="zeBJ0" class="lake-card-margin" data-card-type="block" data-lake-card="codeblock" data-card-value="data:%7B%22mode%22%3A%22html%22%2C%22code%22%3A%22%3Cdiv%20class%3D%5C%22main%5C%22%3E%5Cn%20%20%3Cdiv%20class%3D%5C%22demo%5C%22%3E%3C%2Fdiv%3E%5Cn%3C%2Fdiv%3E%22%2C%22heightLimit%22%3Atrue%2C%22margin%22%3Atrue%2C%22id%22%3A%22zeBJ0%22%7D" data-language="html">
-<div class="lake-codeblock-content">
-<div class="CodeMirror-sizer">
-<pre class="cm-s-default"><span class="lake-preview-line"><span class="lake-preview-line-number lake-lm-pad-level-0"><span class="lake-preview-codeblock-content"><span class="cm-tag cm-bracket">&lt;<span class="cm-tag">div <span class="cm-attribute">class=<span class="cm-string">"main"<span class="cm-tag cm-bracket">&gt;
-<span class="lake-preview-line"><span class="lake-preview-line-number lake-lm-pad-level-0"><span class="lake-preview-codeblock-content">  <span class="cm-tag cm-bracket">&lt;<span class="cm-tag">div <span class="cm-attribute">class=<span class="cm-string">"demo"<span class="cm-tag cm-bracket">&gt;<span class="cm-tag cm-bracket">&lt;/<span class="cm-tag">div<span class="cm-tag cm-bracket">&gt;
-<span class="lake-preview-line"><span class="lake-preview-line-number lake-lm-pad-level-0"><span class="lake-preview-codeblock-content"><span class="cm-tag cm-bracket">&lt;/<span class="cm-tag">div<span class="cm-tag cm-bracket">&gt;</span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></pre>
-</div>
-</div>
-</div>
-<div id="i34Yj" class="lake-card-margin" data-card-type="block" data-lake-card="codeblock" data-card-value="data:%7B%22mode%22%3A%22css%22%2C%22code%22%3A%22.main%7B%5Cn%20%20margin%3A%20100px%20auto%3B%5Cn%20%20width%3A%20600px%3B%5Cn%20%20height%3A%2060px%3B%5Cn%20%20position%3A%20relative%3B%5Cn%7D%5Cn.demo%7B%5Cn%20%20height%3A%20100%25%3B%5Cn%20%20box-sizing%3A%20border-box%3B%5Cn%20%20border-radius%3A%2015px%2030px%2030px%2015px%3B%5Cn%20%20filter%3A%20drop-shadow(0%201px%203px%20rgba(0%2C0%2C0%2C0.22))%3B%20%2F%2F%20%E9%98%B4%E5%BD%B1%E6%95%88%E6%9E%9C%5Cn%20%20background%3A%20%23fff%3B%5Cn%7D%5Cn%5Cn.demo%3A%3Aafter%20%7B%5Cn%20%20content%3A%20%5C%22%5C%22%3B%5Cn%20%20position%3A%20absolute%3B%5Cn%20%20top%3A%200%3B%5Cn%20%20left%3A%200%3B%5Cn%20%20bottom%3A%200%3B%5Cn%20%20right%3A%20100%25%3B%5Cn%20%20%2F%2F%20%E8%83%8C%E6%99%AF%E9%A2%9C%E8%89%B2%E7%BB%99%E4%B8%AA%E6%B8%90%E5%8F%98%E6%95%88%E6%9E%9C%5Cn%20%20background%3A%20linear-gradient(to%20bottom%2C%20%237abcff%200%25%2C%20%2300BCD4%2044%25%2C%20%232196F3%20100%25)%3B%5Cn%20%20border-radius%3A%200px%200px%205px%205px%3B%5Cn%20%20box-shadow%3A%200%2014px%2028px%20rgba(33%2C%20150%2C%20243%2C%200)%2C%200%2010px%2010px%20rgba(9%2C%20188%2C%20215%2C%200.08)%3B%5Cn%20%20animation%3A%20charging%205s%20linear%20infinite%3B%5Cn%20%20filter%3A%20hue-rotate(110deg)%3B%5Cn%7D%5Cn%5Cn%40keyframes%20charging%20%7B%5Cn%20%2050%25%20%7B%5Cn%20%20%20%20box-shadow%3A%200%2014px%2028px%20rgba(0%2C%20150%2C%20136%2C%200.83)%2C%200px%204px%2010px%20rgba(9%2C%20188%2C%20215%2C%200.4)%3B%5Cn%20%20%7D%5Cn%5Cn%20%2095%25%20%7B%5Cn%20%20%20%20right%3A%205%25%3B%5Cn%20%20%20%20filter%3A%20hue-rotate(0deg)%3B%5Cn%20%20%20%20border-radius%3A%200%200%205px%205px%3B%5Cn%20%20%20%20box-shadow%3A%200%2014px%2028px%20rgba(4%2C%20188%2C%20213%2C%20.2)%2C%200%2010px%2010px%20rgba(9%2C%20188%2C%20215%2C%200.08)%3B%5Cn%20%20%7D%5Cn%20%20100%25%20%7B%5Cn%20%20%20%20right%3A%200%25%3B%5Cn%20%20%20%20filter%3A%20hue-rotate(0deg)%3B%5Cn%20%20%20%20border-radius%3A%2015px%2015px%205px%205px%3B%5Cn%20%20%20%20box-shadow%3A%200%2014px%2028px%20rgba(4%2C%20188%2C%20213%2C%200)%2C%200%2010px%2010px%20rgba(9%2C%20188%2C%20215%2C%200.4)%3B%5Cn%20%20%7D%5Cn%7D%22%2C%22heightLimit%22%3Atrue%2C%22margin%22%3Atrue%2C%22id%22%3A%22i34Yj%22%7D" data-language="css">
-<div class="lake-codeblock-content">
-<div class="CodeMirror-sizer">
-<pre class="cm-s-default"><span class="lake-preview-line"><span class="lake-preview-line-number lake-lm-pad-level-1"><span class="lake-preview-codeblock-content"><span class="cm-qualifier">.main{
-<span class="lake-preview-line"><span class="lake-preview-line-number lake-lm-pad-level-1"><span class="lake-preview-codeblock-content">  <span class="cm-property">margin: <span class="cm-number">100px <span class="cm-atom">auto;
-<span class="lake-preview-line"><span class="lake-preview-line-number lake-lm-pad-level-1"><span class="lake-preview-codeblock-content">  <span class="cm-property">width: <span class="cm-number">600px;
-<span class="lake-preview-line"><span class="lake-preview-line-number lake-lm-pad-level-1"><span class="lake-preview-codeblock-content">  <span class="cm-property">height: <span class="cm-number">60px;
-<span class="lake-preview-line"><span class="lake-preview-line-number lake-lm-pad-level-1"><span class="lake-preview-codeblock-content">  <span class="cm-property">position: <span class="cm-atom">relative;
-<span class="lake-preview-line"><span class="lake-preview-line-number lake-lm-pad-level-1"><span class="lake-preview-codeblock-content">}
-<span class="lake-preview-line"><span class="lake-preview-line-number lake-lm-pad-level-1"><span class="lake-preview-codeblock-content"><span class="cm-qualifier">.demo{
-<span class="lake-preview-line"><span class="lake-preview-line-number lake-lm-pad-level-1"><span class="lake-preview-codeblock-content">  <span class="cm-property">height: <span class="cm-number">100%;
-<span class="lake-preview-line"><span class="lake-preview-line-number lake-lm-pad-level-1"><span class="lake-preview-codeblock-content">  <span class="cm-property">box-sizing: <span class="cm-atom">border-box;
-<span class="lake-preview-line"><span class="lake-preview-line-number lake-lm-pad-level-0"><span class="lake-preview-codeblock-content">  <span class="cm-property">border-radius: <span class="cm-number">15px <span class="cm-number">30px <span class="cm-number">30px <span class="cm-number">15px;
-<span class="lake-preview-line"><span class="lake-preview-line-number lake-lm-pad-level-0"><span class="lake-preview-codeblock-content">  <span class="cm-property">filter: <span class="cm-variable">drop-shadow(<span class="cm-number">0 <span class="cm-number">1px <span class="cm-number">3px <span class="cm-atom">rgba(<span class="cm-number">0,<span class="cm-number">0,<span class="cm-number">0,<span class="cm-number">0.22)); // 阴影效果
-<span class="lake-preview-line"><span class="lake-preview-line-number lake-lm-pad-level-0"><span class="lake-preview-codeblock-content">  <span class="cm-property">background: <span class="cm-atom">#fff;
-<span class="lake-preview-line"><span class="lake-preview-line-number lake-lm-pad-level-0"><span class="lake-preview-codeblock-content">}
-<span class="lake-preview-line"><span class="lake-preview-line-number lake-lm-pad-level-0"><span class="lake-preview-codeblock-content">
-<span class="lake-preview-line"><span class="lake-preview-line-number lake-lm-pad-level-0"><span class="lake-preview-codeblock-content"><span class="cm-qualifier">.demo::<span class="cm-variable-3">after {
-<span class="lake-preview-line"><span class="lake-preview-line-number lake-lm-pad-level-0"><span class="lake-preview-codeblock-content">  <span class="cm-property">content: <span class="cm-string">"";
-<span class="lake-preview-line"><span class="lake-preview-line-number lake-lm-pad-level-0"><span class="lake-preview-codeblock-content">  <span class="cm-property">position: <span class="cm-atom">absolute;
-<span class="lake-preview-line"><span class="lake-preview-line-number lake-lm-pad-level-0"><span class="lake-preview-codeblock-content">  <span class="cm-property">top: <span class="cm-number">0;
-<span class="lake-preview-line"><span class="lake-preview-line-number lake-lm-pad-level-0"><span class="lake-preview-codeblock-content">  <span class="cm-property">left: <span class="cm-number">0;
-<span class="lake-preview-line"><span class="lake-preview-line-number lake-lm-pad-level-0"><span class="lake-preview-codeblock-content">  <span class="cm-property">bottom: <span class="cm-number">0;
-<span class="lake-preview-line"><span class="lake-preview-line-number lake-lm-pad-level-0"><span class="lake-preview-codeblock-content">  <span class="cm-property">right: <span class="cm-number">100%;
-<span class="lake-preview-line"><span class="lake-preview-line-number lake-lm-pad-level-0"><span class="lake-preview-codeblock-content">  // 背景颜色给个渐变效果
-<span class="lake-preview-line"><span class="lake-preview-line-number lake-lm-pad-level-0"><span class="lake-preview-codeblock-content">  <span class="cm-property">background: <span class="cm-atom">linear-gradient(<span class="cm-atom">to <span class="cm-atom">bottom, <span class="cm-atom">#7abcff <span class="cm-number">0%, <span class="cm-atom">#00BCD4 <span class="cm-number">44%, <span class="cm-atom">#2196F3 <span class="cm-number">100%);
-<span class="lake-preview-line"><span class="lake-preview-line-number lake-lm-pad-level-0"><span class="lake-preview-codeblock-content">  <span class="cm-property">border-radius: <span class="cm-number">0px <span class="cm-number">0px <span class="cm-number">5px <span class="cm-number">5px;
-<span class="lake-preview-line"><span class="lake-preview-line-number lake-lm-pad-level-0"><span class="lake-preview-codeblock-content">  <span class="cm-property">box-shadow: <span class="cm-number">0 <span class="cm-number">14px <span class="cm-number">28px <span class="cm-atom">rgba(<span class="cm-number">33, <span class="cm-number">150, <span class="cm-number">243, <span class="cm-number">0), <span class="cm-number">0 <span class="cm-number">10px <span class="cm-number">10px <span class="cm-atom">rgba(<span class="cm-number">9, <span class="cm-number">188, <span class="cm-number">215, <span class="cm-number">0.08);
-<span class="lake-preview-line"><span class="lake-preview-line-number lake-lm-pad-level-0"><span class="lake-preview-codeblock-content">  <span class="cm-property">animation: <span class="cm-variable">charging <span class="cm-number">5s <span class="cm-atom">linear <span class="cm-atom">infinite;
-<span class="lake-preview-line"><span class="lake-preview-line-number lake-lm-pad-level-0"><span class="lake-preview-codeblock-content">  <span class="cm-property">filter: <span class="cm-variable">hue-rotate(<span class="cm-number">110deg);
-<span class="lake-preview-line"><span class="lake-preview-line-number lake-lm-pad-level-0"><span class="lake-preview-codeblock-content">}
-<span class="lake-preview-line"><span class="lake-preview-line-number lake-lm-pad-level-0"><span class="lake-preview-codeblock-content">
-<span class="lake-preview-line"><span class="lake-preview-line-number lake-lm-pad-level-0"><span class="lake-preview-codeblock-content"><span class="cm-def">@keyframes <span class="cm-variable">charging {
-<span class="lake-preview-line"><span class="lake-preview-line-number lake-lm-pad-level-0"><span class="lake-preview-codeblock-content">  <span class="cm-number">50% {
-<span class="lake-preview-line"><span class="lake-preview-line-number lake-lm-pad-level-0"><span class="lake-preview-codeblock-content">    <span class="cm-property">box-shadow: <span class="cm-number">0 <span class="cm-number">14px <span class="cm-number">28px <span class="cm-atom">rgba(<span class="cm-number">0, <span class="cm-number">150, <span class="cm-number">136, <span class="cm-number">0.83), <span class="cm-number">0px <span class="cm-number">4px <span class="cm-number">10px <span class="cm-atom">rgba(<span class="cm-number">9, <span class="cm-number">188, <span class="cm-number">215, <span class="cm-number">0.4);
-<span class="lake-preview-line"><span class="lake-preview-line-number lake-lm-pad-level-0"><span class="lake-preview-codeblock-content">  }
-<span class="lake-preview-line"><span class="lake-preview-line-number lake-lm-pad-level-0"><span class="lake-preview-codeblock-content">
-<span class="lake-preview-line"><span class="lake-preview-line-number lake-lm-pad-level-0"><span class="lake-preview-codeblock-content">  <span class="cm-number">95% {
-<span class="lake-preview-line"><span class="lake-preview-line-number lake-lm-pad-level-0"><span class="lake-preview-codeblock-content">    <span class="cm-property">right: <span class="cm-number">5%;
-<span class="lake-preview-line"><span class="lake-preview-line-number lake-lm-pad-level-0"><span class="lake-preview-codeblock-content">    <span class="cm-property">filter: <span class="cm-variable">hue-rotate(<span class="cm-number">0deg);
-<span class="lake-preview-line"><span class="lake-preview-line-number lake-lm-pad-level-0"><span class="lake-preview-codeblock-content">    <span class="cm-property">border-radius: <span class="cm-number">0 <span class="cm-number">0 <span class="cm-number">5px <span class="cm-number">5px;
-<span class="lake-preview-line"><span class="lake-preview-line-number lake-lm-pad-level-0"><span class="lake-preview-codeblock-content">    <span class="cm-property">box-shadow: <span class="cm-number">0 <span class="cm-number">14px <span class="cm-number">28px <span class="cm-atom">rgba(<span class="cm-number">4, <span class="cm-number">188, <span class="cm-number">213, <span class="cm-number">.2), <span class="cm-number">0 <span class="cm-number">10px <span class="cm-number">10px <span class="cm-atom">rgba(<span class="cm-number">9, <span class="cm-number">188, <span class="cm-number">215, <span class="cm-number">0.08);
-<span class="lake-preview-line"><span class="lake-preview-line-number lake-lm-pad-level-0"><span class="lake-preview-codeblock-content">  }
-<span class="lake-preview-line"><span class="lake-preview-line-number lake-lm-pad-level-0"><span class="lake-preview-codeblock-content">  <span class="cm-number">100% {
-<span class="lake-preview-line"><span class="lake-preview-line-number lake-lm-pad-level-0"><span class="lake-preview-codeblock-content">    <span class="cm-property">right: <span class="cm-number">0%;
-<span class="lake-preview-line"><span class="lake-preview-line-number lake-lm-pad-level-0"><span class="lake-preview-codeblock-content">    <span class="cm-property">filter: <span class="cm-variable">hue-rotate(<span class="cm-number">0deg);
-<span class="lake-preview-line"><span class="lake-preview-line-number lake-lm-pad-level-0"><span class="lake-preview-codeblock-content">    <span class="cm-property">border-radius: <span class="cm-number">15px <span class="cm-number">15px <span class="cm-number">5px <span class="cm-number">5px;
-<span class="lake-preview-line"><span class="lake-preview-line-number lake-lm-pad-level-0"><span class="lake-preview-codeblock-content">    <span class="cm-property">box-shadow: <span class="cm-number">0 <span class="cm-number">14px <span class="cm-number">28px <span class="cm-atom">rgba(<span class="cm-number">4, <span class="cm-number">188, <span class="cm-number">213, <span class="cm-number">0), <span class="cm-number">0 <span class="cm-number">10px <span class="cm-number">10px <span class="cm-atom">rgba(<span class="cm-number">9, <span class="cm-number">188, <span class="cm-number">215, <span class="cm-number">0.4);
-<span class="lake-preview-line"><span class="lake-preview-line-number lake-lm-pad-level-0"><span class="lake-preview-codeblock-content">  }
-<span class="lake-preview-line"><span class="lake-preview-line-number lake-lm-pad-level-0"><span class="lake-preview-codeblock-content">}</span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></pre>
-</div>
-</div>
-</div>
-<p data-lake-id="6fb1ad6ef343ee412c11722cb67ab950" data-wording="true">效果如下：</p>
-<div id="nmVnp" class="lake-card-margin" data-card-type="block" data-lake-card="video" data-card-value="data:%7B%22status%22%3A%22done%22%2C%22name%22%3A%22Dec-01-2020%2016-04-27.gif%22%2C%22size%22%3A462026%2C%22percent%22%3A100%2C%22taskId%22%3A%22drynierUcO1Y%22%2C%22margin%22%3Atrue%2C%22id%22%3A%22nmVnp%22%2C%22videoId%22%3A%22inputs%2Fprod%2Fyuque%2F2020%2F346819%2Fgif%2F1606809893953-37013d18-6eb9-4f8d-831f-5262e1da2578.gif%22%7D"><img src="https://i.loli.net/2020/12/01/VUlqsi9kQIu6XJS.gif" /></div>
-<p data-lake-id="045fba94f6f408770f8b8cde4e193f6c" data-wording="true">如上，我们这里有一个小小的暗箱操作，就是我们无法对一个渐变色进行动画animation，但是我们可以通过<span class="lake-fontsize-1515">hue-rotate的方式，利用滤镜进行颜色的变化，从而实现当前的效果。</span></p>
-<h1 id="sElQK" data-lake-id="628d7cfbcbce8d4135b1dc60fabaf395" data-wording="true">三 总结</h1>
-<p data-lake-id="41812fafa7429373db304fa1bc413f3a" data-wording="true">举一反三，该属性玩得顺了的话，其实可以做到很多让人眼前一亮的效果，最直接的就是我们可以将我们的个人博客首页，做根据当前时区和时间而变化的背景色。当然了，安卓手机现在的充电效果也可以做到，但是想要做出来肯定需要一定的css熟练度。我们在使用过程中，通过不断的调节filter里面属性的数据，可以得到差异效果很大的动画，当然了，好的效果需要不断的调试，但是这样会使我们的业务开发变得更加的有乐趣～</p>
-<p data-lake-id="104cc87c361a4a2c7642b9c777775a84" data-wording="true">最后，欢迎指正和修改本文～</p>
-</div>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-      
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-lerna" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-lerna" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
       <a href="/2020/12/11/lerna/" class="article-date">
@@ -399,15 +235,21 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/12/11/lerna/">
-        Lerna初探
-        
-      </a>
+    <h1 class="article-title" itemprop="name">
+      Lerna初探
+      
     </h1>
   
 
       </header>
+      
+      <div class="article-info article-info-post">
+        
+        
+
+        
+        <div class="clearfix"></div>
+      </div>
       
     
     <div class="article-entry" itemprop="articleBody">
@@ -702,17 +544,28 @@
       
     </div>
     
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-      
-    
   </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/12/11/cssFilter/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">&lt;</strong>
+      <div class="article-nav-title">
+        
+          CSS色调旋转滤镜
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/12/11/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Jerome Zhang Blog</div>
+      <strong class="article-nav-caption">&gt;</strong>
+    </a>
+  
+</nav>
+
   
 </article>
 
@@ -721,78 +574,6 @@
 
 
 
-
-  
-    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2020/12/11/hello-world/" class="article-date">
-  	<time datetime="2020-12-11T06:20:23.111Z" itemprop="datePublished">2020-12-11</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/12/11/hello-world/">
-        Jerome Zhang Blog
-        
-      </a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="Hi-I’m-Jerome-Zhang-👋"><a href="#Hi-I’m-Jerome-Zhang-👋" class="headerlink" title="Hi I’m Jerome Zhang 👋"></a>Hi I’m Jerome Zhang 👋</h3><div align="center">
-  <img src="https://i.loli.net/2020/12/04/UJznSrMhxKVeP8B.jpg" style="max-width: 100%;" alt="Welcome to my Github Profile" />
-</div>
-
-<ul>
-<li>🧐  Interested in Front-end.</li>
-<li>💼  Front-end Engineer at DTStack Group.</li>
-<li>🎓  17th graduate of School of Optoelectronics, Shandong Jianzhu University.</li>
-<li>🌱  Recently learning photography knowledge.</li>
-<li>📚  Recently fell in love with books about workplace relations.</li>
-<li>💻  More than 3 year of development work experience.</li>
-<li>⛵  Live happily, work happily.</li>
-<li>✍🏻  Put your back into it!</li>
-<li>✨  Fake it until you become it.</li>
-</ul>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-      
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-  
 </div>
       <footer id="footer">
   <div class="outer">
@@ -818,8 +599,8 @@
 		fancybox: true,
 		mathjax: true,
 		animate: true,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
