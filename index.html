@@ -990,11 +990,11 @@
 
 
   
-    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-eval" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2020/10/10/hello-world/" class="article-date">
-  	<time datetime="2020-10-10T07:50:55.000Z" itemprop="datePublished">2020-10-10</time>
+      <a href="/2020/09/16/eval/" class="article-date">
+  	<time datetime="2020-09-16T09:46:02.000Z" itemprop="datePublished">2020-09-16</time>
 </a>
     </div>
   
@@ -1007,7 +1007,477 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2020/10/10/hello-world/">
+      <a class="article-title" href="/2020/09/16/eval/">
+        Eval
+        
+      </a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p style="text-align: left;" align="center">一.&nbsp;严格模式</p>
+<p>eval<span style="font-family: 宋体;">方法只能在非严格模式中进行使用，在</span><span style="font-family: Calibri;">use strict</span><span style="font-family: 宋体;">中是不允许使用这个方法的。</span></p>
+<p>二.&nbsp;用法</p>
+<ol>
+<li>eval<span style="font-family: 宋体;">函数会接收一个参数</span><span style="font-family: Calibri;">obj</span><span style="font-family: 宋体;">，如果</span><span style="font-family: Calibri;">obj</span><span style="font-family: 宋体;">不是一个字符串，那么</span><span style="font-family: Calibri;">eval</span><span style="font-family: 宋体;">会直接返回</span><span style="font-family: Calibri;">obj</span><span style="font-family: 宋体;">。</span></li>
+<li><span style="font-family: 宋体;">如果</span>obj<span style="font-family: 宋体;">是一个字符串，也分两种情况：第一种情况是字符串内部是一个</span><span style="font-family: Calibri;">js</span><span style="font-family: 宋体;">表达式，且运行结果为一个具体的数值，那么该结果就会返回这个数值，否则就会返回</span><span style="font-family: Calibri;">undifined</span><span style="font-family: 宋体;">；如果内部只是一个单纯的字符串，那么就会返回这个字符串。</span></li>
+<li><span style="font-family: 宋体;">需要注意的点是，</span>js<span style="font-family: 宋体;">声明对象的方法并不能够返回一个具体的数值，必须用括号包起来才可以返回数值，具体如下图：</span></li>
+</ol>
+<p align="center"><strong><span style="font-family: 宋体;"><img src="https://img2018.cnblogs.com/blog/1585158/201903/1585158-20190311140048118-1909078352.png" alt="" /></span></strong></p>
+<p align="center"><strong><span style="font-family: 宋体;">图</span>2.1</strong></p>
+<p>三.&nbsp;局部作用域</p>
+<p>eval<span style="font-family: 宋体;">直接在函数内部使用则返回的是局部变量</span>，如下图：</p>
+<p align="center">&nbsp;<img src="https://img2018.cnblogs.com/blog/1585158/201903/1585158-20190311140054438-1202431667.png" alt="" /></p>
+<p align="center"><strong><span style="font-family: 宋体;">图</span>3.1</strong></p>
+<p><span style="font-family: 宋体;">上图中</span>eval<span style="font-family: 宋体;">直接在函数内部执行，即使在</span><span style="font-family: Calibri;">eval</span><span style="font-family: 宋体;">内部定义了一个全局变量</span><span style="font-family: Calibri;">a</span><span style="font-family: 宋体;">，但是它直接返回了局部变量，所以内部函数并没有执行。</span></p>
+<p><span style="font-family: 宋体;">使在函数内部使用的</span>eval<span style="font-family: 宋体;">成为全局变量的解决方法：</span></p>
+<p>（1）&nbsp;<span style="font-family: 宋体;">利用</span>window.eval<span style="font-family: 宋体;">（）使其成为全局的变量，如下图：</span></p>
+<p>&nbsp;<img src="https://img2018.cnblogs.com/blog/1585158/201903/1585158-20190311140103625-1389872336.png" alt="" style="display: block; margin-left: auto; margin-right: auto;" /></p>
+<p align="center"><strong><span style="font-family: 宋体;">图</span>3.2</strong></p>
+<p align="justify"><span style="font-family: 宋体;">这种情况就是把该变量变为全局变量，这样在执行完函数以后就可以得到这个</span>a<span style="font-family: 宋体;">变量的值。</span></p>
+<p align="justify">（2）&nbsp;<span style="font-family: 宋体;">定义</span>eval<span style="font-family: 宋体;">为全局的，如下图：</span></p>
+<p align="center"><strong><span style="font-family: 宋体;"><img src="https://img2018.cnblogs.com/blog/1585158/201903/1585158-20190311140115511-1632780760.png" alt="" /></span></strong></p>
+<p align="center"><strong><span style="font-family: 宋体;">图</span>3.3</strong></p>
+<p align="justify"><span style="font-family: 宋体;">如上代码就会把</span>b<span style="font-family: 宋体;">变量也变为全局变量，这样就可以在执行完该函数以后获取到</span><span style="font-family: Calibri;">b</span><span style="font-family: 宋体;">变量。</span></p>
+<p align="justify">四.&nbsp;总结</p>
+<p align="justify"><span style="font-family: 宋体;">综上所述，</span>eval<span style="font-family: 宋体;">相当于是在非严格模式下，定义了一种将</span><span style="font-family: Calibri;">JSON</span><span style="font-family: 宋体;">字符串转换为对象的形式，其功能和</span><span style="font-family: Calibri;">JSON.parse()</span><span style="font-family: 宋体;">是相似的。但是区别在于：</span></p>
+<p align="justify"><span style="font-family: 宋体;">当为通过</span>JSON.parse()<span style="font-family: 宋体;">转换为对象后的</span><span style="font-family: Calibri;">JSON</span><span style="font-family: 宋体;">再调用该函数继续进行转换时，就会报错。</span><span style="font-family: Calibri;">eval()</span><span style="font-family: 宋体;">方法不会如此，当传入字符串是对象时，继续使用上述的方式，它会返回原对象。</span></p>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+      
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
+    <article id="post-jsThree" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/09/16/jsThree/" class="article-date">
+  	<time datetime="2020-09-16T09:45:19.000Z" itemprop="datePublished">2020-09-16</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/09/16/jsThree/">
+        个人JS体系整理（三）
+        
+      </a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p style="text-align: left;" align="center">&nbsp;一.&nbsp;<strong>严格模式</strong></p>
+<p align="justify">JavaScript 严格模式（strict mode）即在严格的条件下运行。<span style="font-family: 宋体;">首先声明，严格模式是</span>ES5<span style="font-family: 宋体;">中提出来的，准确来说就是一句指令</span><span style="font-family: Helvetica;">Use strict</span><span style="font-family: 宋体;">，它的目的是指定代码在严格条件下执行，但是在</span><span style="font-family: Helvetica;">JS</span><span style="font-family: 宋体;">旧版本中会被忽略。应用层方面简单理解就是你在严格模式下不可以使用未声明的变量。</span></p>
+<p align="justify">&nbsp;<img src="https://img2018.cnblogs.com/blog/1585158/201903/1585158-20190321113911078-2030094275.png" alt="" style="display: block; margin-left: auto; margin-right: auto;" /></p>
+<p align="center"><strong><span style="font-family: 宋体;">图</span>1.1<span style="font-family: 宋体;">严格模式的函数使用</span></strong></p>
+<p align="justify">第一种使用方式为函数使用，即在函数中使用严格模式；</p>
+<p align="justify"><span style="font-family: 宋体;">第二种方式为在整个脚本中使用，即在你要使用严格模式的</span>js<span style="font-family: 宋体;">文件中开头写</span><span style="font-family: Calibri;">'use strict'</span><span style="font-family: 宋体;">（或者是</span><span style="font-family: Calibri;">"use strict"</span><span style="font-family: 宋体;">）。</span></p>
+<p align="justify"><span style="font-family: 宋体;">严格模式语法存在一定的缺陷，有数个大型网站已经被坑倒了。具体原因如下：严格模式的代码与严格模式的代码合并后还是严格模式，非严格模式的代码与非严格模式的代码合并后还是非严格模式，但是非严格模式的代码与严格模式的代码合并的话，会爆出一个又一个的</span>bug<span style="font-family: 宋体;">。所以，如果确定要使用严格模式来进行代码编辑的话，最好是按照函数去一个个开启严格模式，你可以将整个脚本的内容用一个函数包括起来，然后在这个外部函数中使用严格模式。这样就可以消除合并的问题，但是这就意味着您必须要在函数作用域外声明一个全局变量。</span></p>
+<p align="center"><strong><span style="font-family: 宋体;"><img src="https://img2018.cnblogs.com/blog/1585158/201903/1585158-20190321113920446-1576806918.png" alt="" /></span></strong></p>
+<p align="center"><strong><span style="font-family: 宋体;">图</span>1.2<span style="font-family: 宋体;">严格模式的报错实例（</span><span style="font-family: Calibri;">1</span><span style="font-family: 宋体;">）</span></strong></p>
+<p align="center"><strong>&nbsp;<img src="https://img2018.cnblogs.com/blog/1585158/201903/1585158-20190321113927071-1774411788.png" alt="" /></strong></p>
+<p align="center"><strong><span style="font-family: 宋体;">图</span>1.3<span style="font-family: 宋体;">严格模式的报错实例（</span><span style="font-family: Calibri;">2</span><span style="font-family: 宋体;">）</span></strong></p>
+<p align="justify"><br />（1）不允许使用未声明的变量；严格模式有以下几条不允许的情况：</p>
+<p align="justify">（2）不允许删除函数或者变量；</p>
+<p align="justify">（3）不允许变量重名；</p>
+<p align="justify">（4）不允许使用八进制；</p>
+<p align="justify">（5）不允许使用转义字符；</p>
+<p align="justify">（6）不允许对只读属性赋值；</p>
+<p align="justify">（7）<span style="font-family: 宋体;">变量名不可以使用</span>eval<span style="font-family: 宋体;">字符串；</span></p>
+<p align="justify">（8）<span style="font-family: 宋体;">变量名不能使用专业定义（类似</span>arguments<span style="font-family: 宋体;">这种）；</span></p>
+<p align="justify">（9）<span style="font-family: 宋体;">禁止</span>this<span style="font-family: 宋体;">关键字指向全局对象。</span></p>
+<p align="justify">二.&nbsp;<strong>New</strong></p>
+<p align="justify"><span style="font-family: 宋体;">要创建一个实例，就必须要用到</span>new<span style="font-family: 宋体;">操作符，实际上在调用</span><span style="font-family: Calibri;">new</span><span style="font-family: 宋体;">操作符时会经历以下四步：</span></p>
+<p align="justify"><span style="font-family: 宋体;">（</span>1<span style="font-family: 宋体;">）创建一个新对象；</span></p>
+<p align="justify"><span style="font-family: 宋体;">（</span>2<span style="font-family: 宋体;">）将构造函数的作用域赋给新对象（因此 </span><span style="font-family: Calibri;">this </span><span style="font-family: 宋体;">就指向了这个新对象） ；</span></p>
+<p align="justify"><span style="font-family: 宋体;">（</span>3<span style="font-family: 宋体;">）执行构造函数中的代码（为这个新对象添加属性） ；</span></p>
+<p align="justify"><span style="font-family: 宋体;">（</span>4<span style="font-family: 宋体;">）返回新对象。</span></p>
+<p align="center"><img src="https://img2018.cnblogs.com/blog/1585158/201903/1585158-20190321113937657-95745771.png" alt="" />&nbsp;</p>
+<p align="center"><strong><span style="font-family: 宋体;">图</span>2.1 new<span style="font-family: 宋体;">的使用</span></strong></p>
+<p align="justify"><span style="font-family: 宋体;">如上图所示，前两行为我们正常使用的方法，其实这两行所执行的就是后面的这三行，即先定义一个空对象，然后通过原型把函数的</span>prototype<span style="font-family: 宋体;">赋给对象的</span><span style="font-family: Calibri;">_proto_</span><span style="font-family: 宋体;">，然后再指向当前函数的作用域。当我们给创建实例的函数对象通过原型增加一些方法或者属性时，被它所创建的实例也会具有这些方法和实例，即构造子中，我们来设置&lsquo;类&rsquo;的成员变量，构造子对象</span><span style="font-family: Calibri;">prototype</span><span style="font-family: 宋体;">中我们来设置&lsquo;类&rsquo;的公共方法。于是通过函数对象和</span><span style="font-family: Calibri;">Javascript</span><span style="font-family: 宋体;">特有的</span><span style="font-family: Calibri;">__proto__</span><span style="font-family: 宋体;">与</span><span style="font-family: Calibri;">prototype</span><span style="font-family: 宋体;">及</span><span style="font-family: Calibri;">new</span><span style="font-family: 宋体;">操作符，模拟出类和类实例化的效果。</span></p>
+<p align="justify">三.&nbsp;<strong>Instanceof</strong></p>
+<p align="justify">instanceof<span style="font-family: 宋体;">运算符用于测试构造函数的</span><span style="font-family: Calibri;">prototype</span><span style="font-family: 宋体;">属性是否出现在对象的原型链中的任何位置。话不多数，直接上图：</span></p>
+<p align="center"><img src="https://img2018.cnblogs.com/blog/1585158/201903/1585158-20190321113946009-838605483.png" alt="" />&nbsp;</p>
+<p align="center"><strong><span style="font-family: 宋体;">图</span>3.1</strong></p>
+<p><span style="font-family: 宋体;">如上所示，</span>instanceof<span style="font-family: 宋体;">的用法就是 </span><span style="font-family: Calibri;">Obj instanceof constructor</span><span style="font-family: 宋体;">，其中</span><span style="font-family: Calibri;">Obj</span><span style="font-family: 宋体;">是要检测的对象，</span><span style="font-family: Calibri;">constructor</span><span style="font-family: 宋体;">是构造函数。但是需要注意的是，如果表达式 </span><span style="font-family: Calibri;">obj instanceof Foo </span><span style="font-family: 宋体;">返回</span><span style="font-family: Calibri;">true</span><span style="font-family: 宋体;">，则并不意味着该表达式会永远返回</span><span style="font-family: Calibri;">true</span><span style="font-family: 宋体;">，因为</span><span style="font-family: Calibri;">Foo.prototype</span><span style="font-family: 宋体;">属性的值有可能会改变，改变之后的值很有可能不存在于</span><span style="font-family: Calibri;">obj</span><span style="font-family: 宋体;">的原型链上，这时原表达式的值就会成为</span><span style="font-family: Calibri;">false</span><span style="font-family: 宋体;">。另外一种情况下，原表达式的值也会改变，就是改变对象</span><span style="font-family: Calibri;">obj</span><span style="font-family: 宋体;">的原型链的情况，虽然在目前的</span><span style="font-family: Calibri;">ES</span><span style="font-family: 宋体;">规范中，我们只能读取对象的原型而不能改变它，但借助于非标准的</span><span style="font-family: Calibri;">__proto__</span><span style="font-family: 宋体;">伪属性，是可以实现的。比如执行</span><span style="font-family: Calibri;">obj.__proto__ = {}</span><span style="font-family: 宋体;">之后，</span><span style="font-family: Calibri;">obj instanceof Foo</span><span style="font-family: 宋体;">就会返回</span><span style="font-family: Calibri;">false</span><span style="font-family: 宋体;">了。</span></p>
+<p>&nbsp;<img src="https://img2018.cnblogs.com/blog/1585158/201903/1585158-20190321113951723-1983024921.png" alt="" style="display: block; margin-left: auto; margin-right: auto;" /></p>
+<p align="center"><strong><span style="font-family: 宋体;">图</span>3.2</strong></p>
+<p align="justify">四.&nbsp;<strong>特殊函数（匿名函数）</strong></p>
+<p align="justify">首先，匿名函数的定义是没有函数名称的函数，如下图：</p>
+<p align="center"><img src="https://img2018.cnblogs.com/blog/1585158/201903/1585158-20190321113959770-754264679.png" alt="" />&nbsp;</p>
+<p align="center"><strong><span style="font-family: 宋体;">图</span>4.1</strong></p>
+<p align="justify">上面这段代码就是一个匿名函数，匿名函数的调用方式是声明一个变量，然后把把这个匿名函数的执行的代码，和返回值赋值给声名的变量。</p>
+<p align="center"><img src="https://img2018.cnblogs.com/blog/1585158/201903/1585158-20190321114006681-1798203894.png" alt="" />&nbsp;</p>
+<p align="center"><strong><span style="font-family: 宋体;">图</span>4.2</strong></p>
+<p align="justify">如上就是匿名函数被使用最多的例子，即可以将匿名函数作为参数传给其它函数，接收方函数就可以通过所传递进来的函数完成某些功能</p>
+<p align="justify">五.&nbsp;<strong>延迟加载方式</strong></p>
+<p><span style="font-family: 宋体;">有些</span>JS<span style="font-family: 宋体;">代码在某些情况在需要使用，并不是页面初始化的时候就要用到。延迟加载就是为了解决这个问题。将</span><span style="font-family: Calibri;">JS</span><span style="font-family: 宋体;">切分成许多模块，页面初始化时只加载需要立即执行的</span><span style="font-family: Calibri;">JS</span><span style="font-family: 宋体;">，然后其它</span><span style="font-family: Calibri;">JS</span><span style="font-family: 宋体;">的加载延迟到第一次需要用到的时候再加载。类似图片的延迟加载。先介绍两个重要的属性</span><span style="font-family: Calibri;">defer</span><span style="font-family: 宋体;">和</span><span style="font-family: Calibri;">async</span></p>
+<ol>
+<li>defer<span style="font-family: 宋体;">属性</span></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</ol>
+<p align="center">&nbsp;<img src="https://img2018.cnblogs.com/blog/1585158/201903/1585158-20190321114018380-848180150.png" alt="" /></p>
+<p align="center"><strong><span style="font-family: 宋体;">图</span>5.1</strong></p>
+<p><span style="font-family: 宋体;">浏览器会并行下载</span> wpwl.js<span style="font-family: 宋体;">和其它有 </span><span style="font-family: Calibri;">defer </span><span style="font-family: 宋体;">属性的</span><span style="font-family: Calibri;">script</span><span style="font-family: 宋体;">，而不会阻塞页面后续处理。</span><span style="font-family: Calibri;">defer</span><span style="font-family: 宋体;">属性在</span><span style="font-family: Calibri;">IE 4.0</span><span style="font-family: 宋体;">中就实现了，目前已经十多年了，而火狐也在</span><span style="font-family: Calibri;">3.5</span><span style="font-family: 宋体;">版本以后开始支持</span><span style="font-family: Calibri;">defer</span><span style="font-family: 宋体;">属性。</span></p>
+<ol>
+<li>async<span style="font-family: 宋体;">属性</span></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</ol>
+<p align="center"><img src="https://img2018.cnblogs.com/blog/1585158/201903/1585158-20190321114024372-409709709.png" alt="" />&nbsp;</p>
+<p align="center"><strong><span style="font-family: 宋体;">图</span>5.2</strong></p>
+<p>async<span style="font-family: 宋体;">属性是</span><span style="font-family: Calibri;">HTML5</span><span style="font-family: 宋体;">新增的。作用和</span><span style="font-family: Calibri;">defer</span><span style="font-family: 宋体;">类似，但是它将在下载后尽快执行，不能保证脚本会按顺序执行。它们将在</span><span style="font-family: Calibri;">onload </span><span style="font-family: 宋体;">事件之前完成。</span><span style="font-family: Calibri;">Firefox3.6</span><span style="font-family: 宋体;">、</span><span style="font-family: Calibri;">Opera 10.5</span><span style="font-family: 宋体;">、</span><span style="font-family: Calibri;">IE 9</span><span style="font-family: 宋体;">和 最新的</span><span style="font-family: Calibri;">Chrome </span><span style="font-family: 宋体;">和 </span><span style="font-family: Calibri;">Safari </span><span style="font-family: 宋体;">都支持 </span><span style="font-family: Calibri;">async </span><span style="font-family: 宋体;">属性。可以同时使用 </span><span style="font-family: Calibri;">async </span><span style="font-family: 宋体;">和 </span><span style="font-family: Calibri;">defer</span><span style="font-family: 宋体;">，这样</span><span style="font-family: Calibri;">IE 4</span><span style="font-family: 宋体;">之后的所有</span><span style="font-family: Calibri;">IE </span><span style="font-family: 宋体;">都支持异步加载。</span></p>
+<p>延迟加载的方式有很多，下面介绍几种典型的方式：</p>
+<p align="center"><img src="https://img2018.cnblogs.com/blog/1585158/201903/1585158-20190321114034984-491039315.png" alt="" />&nbsp;</p>
+<p align="center"><strong><span style="font-family: 宋体;">图</span>5.3 <span style="font-family: 宋体;">动态创建</span><span style="font-family: Calibri;">DOM</span></strong></p>
+<p align="center"><img src="https://img2018.cnblogs.com/blog/1585158/201903/1585158-20190321114045037-1532779422.png" alt="" />&nbsp;</p>
+<p align="center"><strong><span style="font-family: 宋体;">图</span>5.4 <span style="font-family: 宋体;">使用</span><span style="font-family: Calibri;">Jquery</span><span style="font-family: 宋体;">的</span><span style="font-family: Calibri;">getScript()</span></strong></p>
+<p align="center"><img src="https://img2018.cnblogs.com/blog/1585158/201903/1585158-20190321114056404-1645079542.png" alt="" />&nbsp;</p>
+<p align="center"><strong><span style="font-family: 宋体;">图</span>5.5 <span style="font-family: 宋体;">使用</span><span style="font-family: Calibri;">setTimeout</span><span style="font-family: 宋体;">延迟方法的加载时间</span></strong></p>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+      
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
+    <article id="post-jsTwo" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/08/16/jsTwo/" class="article-date">
+  	<time datetime="2020-08-16T09:43:37.000Z" itemprop="datePublished">2020-08-16</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/08/16/jsTwo/">
+        个人JS体系整理（二）
+        
+      </a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p style="text-align: left;" align="center">一.&nbsp;<strong>eval</strong></p>
+<p>　　eval()<span style="font-family: 宋体;">函数计算</span><span style="font-family: Calibri;">JavaScript</span><span style="font-family: 宋体;">字符串，并把它作为脚本代码来执行。如果参数是一个表达式，</span><span style="font-family: Calibri;">eval()</span><span style="font-family: 宋体;">函数将执行表达式。如果参数是</span><span style="font-family: Calibri;">Javascript</span><span style="font-family: 宋体;">语句，</span><span style="font-family: Calibri;">eval()</span><span style="font-family: 宋体;">将执行</span><span style="font-family: Calibri;">Javascript</span><span style="font-family: 宋体;">语句。</span></p>
+<p align="center"><span style="font-family: 宋体;"><img src="https://img2018.cnblogs.com/blog/1585158/201903/1585158-20190305164117587-1497184678.png" alt="" /></span></p>
+<p align="center"><span style="font-family: 宋体;">图</span>1.1</p>
+<p align="justify"><span style="font-family: 宋体;">　　如上图所示，第一个</span>eval<span style="font-family: 宋体;">内部为一个函数表达式，在执行该函数的同时，定义了两个全局变量</span><span style="font-family: Calibri;">X</span><span style="font-family: 宋体;">和</span><span style="font-family: Calibri;">Y</span><span style="font-family: 宋体;">，所以结果分别为</span><span style="font-family: Calibri;">200</span><span style="font-family: 宋体;">、</span><span style="font-family: Calibri;">4</span><span style="font-family: 宋体;">、</span><span style="font-family: Calibri;">27</span><span style="font-family: 宋体;">。</span></p>
+<p align="justify"><span style="font-family: 宋体;">　　由于因为它会执行任意传给它的代码，在代码字符串未知或者是来自一个不信任的源时，会导致安全问题，同时非常耗性能（它会执行两次</span>2<span style="font-family: 宋体;">次，一次解析成</span><span style="font-family: Calibri;">js</span><span style="font-family: 宋体;">语句，一次执行），最重要的是，</span>99.9%<span style="font-family: 宋体;">使用</span><span style="font-family: Calibri;">eval </span><span style="font-family: 宋体;">的场景都有不使用</span><span style="font-family: Calibri;">eval</span><span style="font-family: 宋体;">的解决方案</span>，所以<span style="font-family: 宋体;">在任何情况下我们都应该避免使用</span>eval<span style="font-family: 宋体;">函数。</span></p>
+<p align="justify">二.&nbsp;<strong>null<span style="font-family: 宋体;">与</span><span style="font-family: Calibri;">undefined </span><span style="font-family: 宋体;">的区别</span></strong></p>
+<p align="justify">　　(1)&nbsp;null<span style="font-family: 宋体;">表示一个对象是&ldquo;没有值&rdquo;的值，也就是值为&ldquo;空&rdquo;；</span><span style="font-family: Calibri;">undefined</span><span style="font-family: 宋体;">表示一个变量声明了没有初始化</span><span style="font-family: Calibri;">(</span><span style="font-family: 宋体;">即没有赋值</span><span style="font-family: Calibri;">)</span><span style="font-family: 宋体;">。</span></p>
+<p align="justify">　　(2)&nbsp;undefined<span style="font-family: 宋体;">不是一个有效的</span><span style="font-family: Calibri;">JSON</span><span style="font-family: 宋体;">，而</span><span style="font-family: Calibri;">null</span><span style="font-family: 宋体;">是；</span><span style="font-family: Calibri;">undefined</span><span style="font-family: 宋体;">的类型</span><span style="font-family: Calibri;">(typeof)</span><span style="font-family: 宋体;">是</span><span style="font-family: Calibri;">undefined</span><span style="font-family: 宋体;">，而</span><span style="font-family: Calibri;">null</span><span style="font-family: 宋体;">的类型</span><span style="font-family: Calibri;">(typeof)</span><span style="font-family: 宋体;">是</span><span style="font-family: Calibri;">object</span><span style="font-family: 宋体;">。</span></p>
+<p align="justify">　　(3)&nbsp;<span style="font-family: 宋体;">在验证</span>null<span style="font-family: 宋体;">时，一定要使用&ldquo;</span><span style="font-family: Calibri;">===</span><span style="font-family: 宋体;">&rdquo; ，因为&ldquo;</span><span style="font-family: Calibri;">==</span><span style="font-family: 宋体;">&rdquo;无法分别</span><span style="font-family: Calibri;">null</span><span style="font-family: 宋体;">和</span><span style="font-family: Calibri;">undefined!</span></p>
+<p align="center"><span style="font-family: 宋体;"><span style="font-family: 'PingFang SC', 'Helvetica Neue', Helvetica, Arial, sans-serif;"><img src="https://img2018.cnblogs.com/blog/1585158/201903/1585158-20190305164140368-459112732.png" alt="" /></span></span></p>
+<p style="text-align: center;">图2.1</p>
+<p style="text-align: left;" align="center"><span style="font-family: 宋体;"><span style="font-family: 'PingFang SC', 'Helvetica Neue', Helvetica, Arial, sans-serif;">三.&nbsp;</span><strong style="font-family: 'PingFang SC', 'Helvetica Neue', Helvetica, Arial, sans-serif;">事件与事件流</strong></span></p>
+<p align="justify">　　(1)&nbsp;事件</p>
+<p align="justify"><span style="font-family: 宋体;">　　事件是文档或者浏览器窗口中发生的，特定的交互瞬间，也可以理解为是用户或浏览器自身执行的某种动作，如</span>click,change<span style="font-family: 宋体;">和</span><span style="font-family: Calibri;">hover</span><span style="font-family: 宋体;">都是事件的名字，同时事件是</span><span style="font-family: Calibri;">javaScript</span><span style="font-family: 宋体;">和</span><span style="font-family: Calibri;">DOM</span><span style="font-family: 宋体;">之间交互的桥梁。</span></p>
+<p align="justify">　　(2)&nbsp;事件流</p>
+<p align="justify"><span style="font-family: 宋体;">　　事件发生时会在元素节点与根节点之间按照特定的顺序传播，路径所经过的所有节点都会收到该事件，这个传播过程即</span>DOM<span style="font-family: 宋体;">事件流</span>。事件流有两种模型，即捕获型事件流和冒泡型事件流。</p>
+<p align="justify"><span style="font-family: 宋体;">　　冒泡型事件流：事件的传播是从最特定的事件目标到最不特定的事件目标。即从</span>DOM<span style="font-family: 宋体;">树的叶子到根。</span></p>
+<p align="justify"><span style="font-family: 宋体;">　　捕获型事件流：事件的传播是从最不特定的事件目标到最特定的事件目标。即从</span>DOM<span style="font-family: 宋体;">树的根到叶子。</span></p>
+<p align="justify"><img src="https://img2018.cnblogs.com/blog/1585158/201903/1585158-20190305164158198-1493204851.png" alt="" style="display: block; margin-left: auto; margin-right: auto;" /></p>
+<p align="center"><span style="font-family: 宋体;">图</span>3.1</p>
+<p><span style="font-family: 宋体;">　　如上图所示，</span>DOM标准采用捕获+冒泡，两种事件流都会触发DOM的所有对象，从document对象开始，也在document对象结束。DOM标准规定事件流包括三个阶段：事件捕获阶段、处于目标阶段和事件冒泡阶段。</p>
+<p>　　(1)&nbsp;<span style="font-family: 宋体;">事件捕获阶段：实际目标（</span>&lt;div&gt;）在捕获阶段不会接收事件。也就是在捕获阶段，事件从document到&lt;html&gt;再到&lt;body&gt;就停止了。</p>
+<p>　　(2)&nbsp;<span style="font-family: 宋体;">处于目标阶段：事件在</span>&lt;div&gt;上发生并处理。但是事件处理会被看成是冒泡阶段的一部分。</p>
+<p>　　(3)&nbsp;冒泡阶段：事件又传播回文档。</p>
+<p>　　来个例子搞一下，如下图：</p>
+<p align="center"><span style="font-family: 宋体;"><img src="https://img2018.cnblogs.com/blog/1585158/201903/1585158-20190305164206272-1651298268.png" alt="" /></span></p>
+<p align="center"><span style="font-family: 宋体;">图</span>3.2</p>
+<p align="justify"><span style="font-family: 宋体;">　　上图点击</span>btn1的区域，会先弹出&ldquo;btn1&rdquo;，紧跟着弹出&ldquo;content&rdquo;，这就是一个最典型的冒泡事件。</p>
+<p align="center"><span style="font-family: 宋体;"><img src="https://img2018.cnblogs.com/blog/1585158/201903/1585158-20190305164212897-496780305.png" alt="" /></span></p>
+<p align="center"><span style="font-family: 宋体;">图</span>3.3</p>
+<p><span style="font-family: 宋体;">　　上图代码运行结果为：先弹出</span>&ldquo;btn1&rdquo;,然后弹出&ldquo;btn2&rdquo;,最后弹出&ldquo;content &rdquo;。它与前一个代码的区别是，一个是绑定，一个是注册。即DOM元素只能绑定一个事件，类似变量，后面的会把前面的覆盖掉；但是DOM元素可以注册多个事件，即在注册第一个事件的时候，同时注册了第二个事件，所以在执行的时候，会从第二个（也就是当前元素的最后一个注册事件）开始执行，直到执行完第三个事件。</p>
+<p align="justify">四.&nbsp;<strong>闭包</strong></p>
+<p align="justify"><span style="font-family: 宋体;">　　闭包，官方对闭包的解释是：一个拥有许多变量和绑定了这些变量的环境的表达式（通常是一个函数）</span><span style="font-family: 宋体;">。</span><span style="font-family: 宋体;">因而，这些变量也是该表达式的一部分。闭包的特点如下：</span></p>
+<ol>
+<li><span style="font-family: 宋体;">作为一个函数变量的一个引用，当函数返回时，其处于激活状态。</span></li>
+<li><span style="font-family: 宋体;">　</span> 2. <span style="font-family: 宋体;">一个闭包就是当一个函数返回时，一个没有释放资源的栈区。</span></li>
+</ol>
+<p align="justify"><span style="font-family: 宋体;">　　简单的说，</span>Javascript<span style="font-family: 宋体;">允许使用内部函数</span><span style="font-family: 宋体;">，</span><span style="font-family: 宋体;">即函数定义和函数表达式位于另一个函数的函数体内。而且，这些内部函数可以访问它们所在的外部函数中声明的所有局部变量、参数和声明的其他内部函数。当其中一个这样的内部函数在包含它们的外部函数之外被调用时，就会形成闭包。</span></p>
+<p align="center"><img src="https://img2018.cnblogs.com/blog/1585158/201903/1585158-20190305164304068-868605781.png" alt="" /></p>
+<p align="center"><span style="font-size: 13px;">图4.1</span></p>
+<p align="justify"><span style="font-family: 宋体;">　　如上图所示，给函数原型增加一个方法，同时创建一个实例，会得到结果</span>3.14159<span style="font-family: 宋体;">。</span></p>
+<p align="justify"><span style="font-family: 宋体;"><img src="https://img2018.cnblogs.com/blog/1585158/201903/1585158-20190305164322090-192449816.png" alt="" style="display: block; margin-left: auto; margin-right: auto;" /></span></p>
+<p align="center"><span style="font-size: 13px;">&nbsp;&nbsp;<span style="font-family: 宋体;">图</span>4.2</span></p>
+<p align="justify"><span style="font-family: 宋体;">　　上图就是把一个函数</span>return<span style="font-family: 宋体;">为一个变量，那么当创建该函数的实例的时候，所有该变量具有的方法都可以被调用，同时还是在函数作用域之外被调用，即闭包，结果依旧为</span>3.14159<span style="font-family: 宋体;">。</span></p>
+<p style="text-align: center;" align="justify"><img src="https://img2018.cnblogs.com/blog/1585158/201903/1585158-20190305164459157-896201755.png" alt="" /></p>
+<p style="text-align: center;" align="justify"><span style="font-size: 13px;">图4.3</span></p>
+<p align="justify"><span style="font-family: 宋体;">这属于最容易理解的方式，即直接</span>new<span style="font-family: 宋体;">一个对象，给它赋予各种属性和方法，最终结果依旧为</span><span style="font-family: 'Calibri Light';">3.14159</span><span style="font-family: 宋体;">。</span></p>
+<p align="center"><span style="font-family: 宋体;"><img src="https://img2018.cnblogs.com/blog/1585158/201903/1585158-20190305164604546-1830244593.png" alt="" /></span></p>
+<p align="center"><span style="font-family: 宋体;">图</span>4.4</p>
+<p align="justify"><span style="font-family: 宋体;">　　这种方式是使用最多的一种方式，也是最方便的一种方式。（</span>var obj = {}<span style="font-family: 宋体;">就是声明一个空的对象。</span><span style="font-family: 宋体;">）</span></p>
+<p align="justify"><span style="font-family: 宋体;">　　闭包的用途如下：</span></p>
+<ol>
+<li><span style="font-family: 宋体;">函数只需要执行一次，其内部变量无需维护，</span><span style="font-family: 宋体;">比如</span>UI<span style="font-family: 宋体;">的初始化</span><span style="font-family: 宋体;">；</span></li>
+<li><span style="font-family: 宋体;">前端缓存。假设有一个很耗性能和时间的函数对象，每次调用都需要很久的时间，</span><span style="font-family: 宋体;">那么我们就需要将计算出来的值存储起来，当调用这个函数的时候，首先在缓存中查找，如果找不到，则进行计算，然后更新缓存并返回值，如果找到了，直接返回查找到的值即可。闭包正是可以做到这一点，因为它不会释放外部的引用，从而函数内部的值可以得以保留。</span></li>
+<li><span style="font-family: 宋体;">封装函数（组件化）</span></li>
+<li><span style="font-family: 宋体;">实现类和继承（参考第一种写法）</span></li>
+</ol>
+<p align="justify">五.&nbsp;<strong>call<span style="font-family: 宋体;">与</span><span style="font-family: Calibri;">apply</span></strong></p>
+<ol>
+<li>共同点</li>
+</ol>
+<p align="justify"><span style="font-family: 宋体;">　　都</span>&ldquo;<span style="font-family: 宋体;">可以用来代替另一个对象调用一个方法，将一个函数的对象上下文从初始的上下文改变为由</span><span style="font-family: Calibri;">thisObj</span><span style="font-family: 宋体;">指定的新对象</span><span style="font-family: Calibri;">&rdquo;</span><span style="font-family: 宋体;">。</span></p>
+<ol>
+<li>不同点</li>
+</ol>
+<p align="justify">　　apply<span style="font-family: 宋体;">：</span>apply(thisObj<span style="font-family: 宋体;">，</span><span style="font-family: Arial;">[argArray])</span><span style="font-family: 宋体;">。</span><span style="font-family: 宋体;">最多只能有两个参数</span>&mdash;&mdash;<span style="font-family: 宋体;">新</span><span style="font-family: Calibri;">this</span><span style="font-family: 宋体;">对象和一个数组</span><span style="font-family: Calibri;">argArray</span><span style="font-family: 宋体;">。如果给该方法传递多个参数，则把参数都写进这个数组里面，当然，即使只有一个参数，也要写进数组里。如果</span><span style="font-family: Calibri;">argArray</span><span style="font-family: 宋体;">不是一个有效的数组或</span><span style="font-family: Calibri;">arguments</span><span style="font-family: 宋体;">对象，那么将导致一个</span><span style="font-family: Calibri;">TypeError</span><span style="font-family: 宋体;">。如果没有提供</span><span style="font-family: Calibri;">argArray</span><span style="font-family: 宋体;">和</span><span style="font-family: Calibri;">thisObj</span><span style="font-family: 宋体;">任何一个参数，那么</span><span style="font-family: Calibri;">Global</span><span style="font-family: 宋体;">对象将被用作</span><span style="font-family: Calibri;">thisObj</span><span style="font-family: 宋体;">，并且无法被传递任何参数。</span></p>
+<p align="justify">　　call<span style="font-family: 宋体;">：</span>call(thisObj<span style="font-family: 宋体;">，</span><span style="font-family: Arial;">Object)</span><span style="font-family: 宋体;">。</span><span style="font-family: 宋体;">它可以接受多个参数，第一个参数与</span>apply<span style="font-family: 宋体;">一样，后面则是一串参数列表。这个方法主要用在</span><span style="font-family: Calibri;">js</span><span style="font-family: 宋体;">对象各方法相互调用的时候，使当前</span><span style="font-family: Calibri;">this</span><span style="font-family: 宋体;">实例指针保持一致，或者在特殊情况下需要改变</span><span style="font-family: Calibri;">this</span><span style="font-family: 宋体;">指针。如果没有提供</span><span style="font-family: Calibri;">thisObj</span><span style="font-family: 宋体;">参数，那么 </span><span style="font-family: Calibri;">Global </span><span style="font-family: 宋体;">对象被用作</span><span style="font-family: Calibri;">thisObj</span><span style="font-family: 宋体;">。 </span></p>
+<p align="center"><span style="font-family: 宋体;"><img src="https://img2018.cnblogs.com/blog/1585158/201903/1585158-20190305164628448-1800687919.png" alt="" /></span></p>
+<p align="center"><span style="font-family: 宋体;">图</span>5.1</p>
+<p align="justify"><span style="font-family: 宋体;">　　如上图所示，无论是</span>apply<span style="font-family: 宋体;">还是</span><span style="font-family: Calibri;">call</span><span style="font-family: 宋体;">，它的结果都是一样的，都是调用的前面的函数的方法，但是传的参数是不一样的，当然这只是在参数方面的不同。</span></p>
+<p align="center"><span style="font-family: 宋体;"><img src="https://img2018.cnblogs.com/blog/1585158/201903/1585158-20190305164637016-1919590125.png" alt="" /></span></p>
+<p align="center"><span style="font-family: 宋体;">图</span>5.2</p>
+<p><span style="font-family: 宋体;">　　如上，就是利用</span>call<span style="font-family: 宋体;">和</span><span style="font-family: Calibri;">apply</span><span style="font-family: 宋体;">实现继承，通过给函数赋予属性和方法，然后给另一个函数继承原函数，再创建新函数的实例，就实现了最简单的继承。</span></p>
+<p><img src="https://img2018.cnblogs.com/blog/1585158/201903/1585158-20190305164643503-40524234.png" alt="" style="display: block; margin-left: auto; margin-right: auto;" /></p>
+<p style="text-align: center;">　　图5.3</p>
+<p align="justify">　　如上图所示，即一种多重继承的实现方式。</p>
+<p>&nbsp;</p>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+      
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
+    <article id="post-jsOne" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/07/16/jsOne/" class="article-date">
+  	<time datetime="2020-07-16T09:42:07.000Z" itemprop="datePublished">2020-07-16</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/07/16/jsOne/">
+        个人JS体系完善（一）
+        
+      </a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p align="center"><span style="font-size: 18px;"><strong><span style="font-family: 宋体;">个人</span>JS<span style="font-family: 宋体;">体系整理（一）</span></strong></span></p>
+<p align="justify"><span style="font-size: 16px;">一.&nbsp;<strong>原型</strong></span></p>
+<p align="justify">JS<span style="font-family: 宋体;">每声明一个</span><span style="font-family: Calibri;">Function</span><span style="font-family: 宋体;">，都有</span><span style="font-family: Calibri;">Prototype</span><span style="font-family: 宋体;">原型，</span><span style="font-family: Calibri;">Prototype</span><span style="font-family: 宋体;">原型是函数的一个默认属性，在函数的创建过程中由</span><span style="font-family: Calibri;">JS</span><span style="font-family: 宋体;">编译器自动添加，也就是说每当生产一个</span><span style="font-family: Calibri;">Function</span><span style="font-family: 宋体;">对象的时候，就有一个原型</span><span style="font-family: Calibri;">Prototype</span><span style="font-family: 宋体;">。按照</span><span style="font-family: Calibri;">Javascript</span><span style="font-family: 宋体;">的说法，</span><span style="font-family: Calibri;">Function</span><span style="font-family: 宋体;">定义的</span><span style="font-family: Calibri;">Object(</span><span style="font-family: 宋体;">对象</span><span style="font-family: Calibri;">),</span><span style="font-family: 宋体;">是一个很特殊的对象，这个使用</span><span style="font-family: Calibri;">Function</span><span style="font-family: 宋体;">定义的对象与使用</span><span style="font-family: Calibri;">New</span><span style="font-family: 宋体;">操作符生成的对象之间有一个重要的区别，这个区别就是</span><span style="font-family: Calibri;">Function</span><span style="font-family: 宋体;">定义的对象有一个</span><span style="font-family: Calibri;">Prototype</span><span style="font-family: 宋体;">属性，称之为函数对象，而使用</span><span style="font-family: Calibri;">New</span><span style="font-family: 宋体;">生成的对象就没有这个</span><span style="font-family: Calibri;">Prototype</span><span style="font-family: 宋体;">属性，称之为普通对象。</span></p>
+<p align="center"><span style="font-family: 宋体;"><img src="https://img2018.cnblogs.com/blog/1585158/201902/1585158-20190218150016897-1344948422.png" alt="" width="554" height="206" /></span></p>
+<p align="center"><span style="font-family: 宋体;">图</span>1.1</p>
+<p><span style="font-family: 宋体;">如上图所示，第一个</span>Console<span style="font-family: 宋体;">结果为</span><span style="font-family: Calibri;">Undifined</span><span style="font-family: 宋体;">，证明了</span><span style="font-family: Calibri;">New</span><span style="font-family: 宋体;">的对象是没有原型</span>Prototype<span style="font-family: 宋体;">的；第二个</span><span style="font-family: Calibri;">Console</span><span style="font-family: 宋体;">结果为增加原型</span><span style="font-family: Calibri;">Name</span><span style="font-family: 宋体;">以后的原函数，证明了只有函数对象才具有</span>原型Prototype<span style="font-family: 宋体;">；第三个</span><span style="font-family: Calibri;">Console</span><span style="font-family: 宋体;">的结果为</span>&rsquo;hangzhou&rsquo;<span style="font-family: 宋体;">，证明了通过原型增加的属性是存在的；第四个</span>Console<span style="font-family: 宋体;">的结果为</span>&rsquo;hangzhou&rsquo;，证明了通过原型增加的属性，是可以在该对象所具有的方法里面进行调用获取到的。</p>
+<p align="center"><span style="font-family: 宋体;"><img src="https://img2018.cnblogs.com/blog/1585158/201902/1585158-20190218150026943-1893945414.png" alt="" /></span></p>
+<p align="center"><span style="font-family: 宋体;">图</span>1.2</p>
+<p align="justify">如上图所示，如果原函数本身的属性或方法与利用原型增加的属性或方法重名时，默认调用的依旧是该函数对象本身的属性或者方法，即函数本身的属性或者方法的优先级高于原型的属性或者方法。</p>
+<p align="justify"><span style="font-size: 16px;">二.&nbsp;<strong>原型链</strong></span></p>
+<p align="justify"><span style="font-family: 宋体;">官方对于原型链的解释是原型链是实现继承的主要方法，其基本思想是利用原型让一个引用类型继承另一个应用类型的属性和方法。通俗一些理解，每个对象都会在其内部初始化一个属性，就是</span>Prototype(<span style="font-family: 宋体;">原型</span><span style="font-family: Calibri;">)</span><span style="font-family: 宋体;">，当我们访问一个对象的属性时， 如果这个对象内部不存在这个属性，那么他就会去</span><span style="font-family: Calibri;">Prototype</span><span style="font-family: 宋体;">里找这个属性，这个</span><span style="font-family: Calibri;">Prototype</span><span style="font-family: 宋体;">又会有自己的</span><span style="font-family: Calibri;">Prototype</span><span style="font-family: 宋体;">， 于是就这样一直找下去，也就是我们平时所说的原型链的概念。</span></p>
+<p align="justify">提到原型链，就要提一个词_proto_<span style="font-family: 宋体;">，</span><span style="font-family: 宋体;">它是基本对象的属性，相对应的就是每一个函数对象都有一个</span><span style="font-family: Arial;">自己的</span>Prototype<span style="font-family: Arial;">原型</span><span style="font-family: 宋体;">，</span><span style="font-family: 宋体;">由于函数对象也属于基本对象，所以函数对象也有</span>_proto_<span style="font-family: 宋体;">，</span><span style="font-family: Arial;">每当去定义一个</span>Prototype<span style="font-family: Arial;">的时候，就相当于把该实例的</span>__proto__指向一个结构体，那么这个被指向结构体就称为该实例的原型。&nbsp;</p>
+<p align="center"><span style="font-family: 宋体;"><img src="https://img2018.cnblogs.com/blog/1585158/201902/1585158-20190218150038280-931538109.png" alt="" /></span></p>
+<p align="center"><span style="font-family: 宋体;">图</span>2.1</p>
+<p align="justify"><span style="font-family: 宋体;">当你定义一个函数对象的时候，其内部就有这样一个链表关系。声明</span>foo<span style="font-family: 宋体;">对象，自带了</span><span style="font-family: Calibri;">_proto_</span><span style="font-family: 宋体;">的属性，而这个属性指向了</span><span style="font-family: Calibri;">Prototype</span><span style="font-family: 宋体;">，从而实现对象的扩展（例如继承等操作）。</span></p>
+<p align="center"><span style="font-family: 宋体;"><img src="https://img2018.cnblogs.com/blog/1585158/201902/1585158-20190218150052438-2118839481.png" alt="" width="412" height="549" /></span></p>
+<p align="center"><span style="font-family: 宋体;">图</span>2.2</p>
+<p align="justify"><span style="font-family: 宋体;">如上图所示，一个没有继承操作的函数的</span>_proto_<span style="font-family: 宋体;">都会指向</span><span style="font-family: Calibri;">Object.Prototype</span><span style="font-family: 宋体;">，而</span><span style="font-family: Calibri;">Object.Prototype</span><span style="font-family: 宋体;">都会指向</span><span style="font-family: Calibri;">Null</span><span style="font-family: 宋体;">。</span></p>
+<p align="center"><span style="font-family: 宋体;"><img src="https://img2018.cnblogs.com/blog/1585158/201902/1585158-20190218150114890-1840942670.png" alt="" width="305" height="246" /></span></p>
+<p align="center"><span style="font-family: 宋体;">图</span>2.3</p>
+<p align="justify"><span style="font-family: 宋体;">如上图所示，定义两个函数对象</span>A<span style="font-family: 宋体;">和</span><span style="font-family: Calibri;">B</span><span style="font-family: 宋体;">，每个对象分别具有一个属性和方法。他们两个函数对象的区别是</span><span style="font-family: Calibri;">B</span><span style="font-family: 宋体;">继承了</span><span style="font-family: Calibri;">A</span><span style="font-family: 宋体;">，而继承是通过创建</span><span style="font-family: Calibri;">A</span><span style="font-family: 宋体;">的实例，并将实例赋给</span><span style="font-family: Calibri;">B.Prototype</span><span style="font-family: 宋体;">实现的。实现的本质是重写原型的对象，代之以一个新的类型的实例。换句话说，原来存在于</span><span style="font-family: Calibri;">A</span><span style="font-family: 宋体;">的实例中的所有属性和方法，现在也存在于</span><span style="font-family: Calibri;">B.Prototype</span><span style="font-family: 宋体;">中了。在确立了继承关系之后，我们给</span><span style="font-family: Calibri;">B.Prototype</span><span style="font-family: 宋体;">添加了一个方法，这样就继承</span><span style="font-family: Calibri;">A</span><span style="font-family: 宋体;">的属性和方法的基础上又添加了一个新方法。然后继续创建一个</span><span style="font-family: Calibri;">B</span><span style="font-family: 宋体;">的实例</span><span style="font-family: Calibri;">C</span><span style="font-family: 宋体;">，这样</span><span style="font-family: Calibri;">C</span><span style="font-family: 宋体;">就具有了</span><span style="font-family: Calibri;">B</span><span style="font-family: 宋体;">的全部方法和属性，所以</span><span style="font-family: Calibri;">Console</span><span style="font-family: 宋体;">的结果分别是</span><span style="font-family: Calibri;">111</span><span style="font-family: 宋体;">与</span><span style="font-family: Calibri;">222</span><span style="font-family: 宋体;">。</span></p>
+<p align="justify">前端面试拓展：</p>
+<p align="center"><span style="font-family: 宋体;"><img src="https://img2018.cnblogs.com/blog/1585158/201902/1585158-20190218150126187-642172313.png" alt="" /></span></p>
+<p align="center"><span style="font-family: 宋体;">图</span>2.4</p>
+<p align="justify">p<span style="font-family: 宋体;">没有</span><span style="font-family: Calibri;">b</span><span style="font-family: 宋体;">属性，会一直通过</span><span style="font-family: Calibri;">__proto__</span><span style="font-family: 宋体;">向上查找，最后当查找到</span><span style="font-family: Calibri;">Object.Prototype</span><span style="font-family: 宋体;">时找到，最后打印出</span><span style="font-family: Calibri;">b</span><span style="font-family: 宋体;">，向上查找过程中，得到的是</span><span style="font-family: Calibri;">Object.Prototype</span><span style="font-family: 宋体;">，而不是</span><span style="font-family: Calibri;">Function.Prototype</span><span style="font-family: 宋体;">，所以找不到</span><span style="font-family: Calibri;">a</span><span style="font-family: 宋体;">属性，所以结果为</span><span style="font-family: Calibri;">Undefined</span><span style="font-family: 宋体;">，这就是原型链，通过</span><span style="font-family: Calibri;">__proto__</span><span style="font-family: 宋体;">向上进行查找，最终到</span><span style="font-family: Calibri;">Null</span><span style="font-family: 宋体;">结束。最终逻辑即下图：</span></p>
+<p align="center"><span style="font-family: 宋体;"><img src="https://img2018.cnblogs.com/blog/1585158/201902/1585158-20190218150231239-1503449038.png" alt="" width="833" height="328" /></span></p>
+<p align="center"><span style="font-family: 宋体;">图</span>2.5</p>
+<p align="justify"><span style="font-size: 16px;">三.&nbsp;<strong>对象简介</strong></span></p>
+<p>&nbsp;<span style="font-family: 宋体;">对象的定义：对象是</span>Javascript<span style="font-family: 宋体;">的一个基本数据类型，是一种复合值，它将很多值（原始值或者其他对象）聚合在一起，可通过名字访问这些值。即属性的无序集合。</span></p>
+<p><span style="font-family: 宋体;">第一：</span>Javascript<span style="font-family: 宋体;">对象是基本数据类型之一，是复合类型；</span></p>
+<p><span style="font-family: 宋体;">第二：</span>Javascript<span style="font-family: 宋体;">中几乎所有事物都是做对象；</span></p>
+<p><span style="font-family: 宋体;">第三：</span>Javascript<span style="font-family: 宋体;">的对象是拥有属性和方法的数据；</span></p>
+<p><span style="font-family: 宋体;">第四：</span>Javascript <span style="font-family: 宋体;">中的对象可以简单理解成</span><span style="font-family: Calibri;">"</span><span style="font-family: 宋体;">名称</span><span style="font-family: Calibri;">:</span><span style="font-family: 宋体;">值</span><span style="font-family: Calibri;">"</span><span style="font-family: 宋体;">对</span><span style="font-family: Calibri;">(name:value)</span><span style="font-family: 宋体;">。名称（</span><span style="font-family: Calibri;">name</span><span style="font-family: 宋体;">）：</span><span style="font-family: Calibri;">"</span><span style="font-family: 宋体;">名称</span><span style="font-family: Calibri;">"</span><span style="font-family: 宋体;">部分是一个 </span><span style="font-family: Calibri;">Javascript </span><span style="font-family: 宋体;">字符串</span></p>
+<p align="center"><span style="font-family: 宋体;"><img src="https://img2018.cnblogs.com/blog/1585158/201902/1585158-20190218150246843-1311630024.png" alt="" /></span></p>
+<p align="center"><span style="font-family: 宋体;">图</span>3.1</p>
+<p>第一种创建对象方式如上图所示，直接创建一个对象，或者叫做对象直接量、字面量。</p>
+<p align="center"><span style="font-family: 宋体;"><img src="https://img2018.cnblogs.com/blog/1585158/201902/1585158-20190218150253989-1288881521.png" alt="" /></span></p>
+<p align="center"><span style="font-family: 宋体;">图</span>3.2</p>
+<p><span style="font-family: 宋体;">第二种创建对象方式如上图所示，通过</span>new.object<span style="font-family: 宋体;">创建对象，该方法只能创建系统自带的对象，如：</span><span style="font-family: Calibri;">new Object(), Array(), Number(),Boolean(), Date()...</span></p>
+<p align="center"><span style="font-family: 宋体;"><img src="https://img2018.cnblogs.com/blog/1585158/201902/1585158-20190218150259599-1142192596.png" alt="" /></span></p>
+<p align="center"><span style="font-family: 宋体;">图</span>3.3</p>
+<p>第三种创建对象方式如上图所示，通过构造函数的形式创建对象，构造函数一般使用驼峰式命名方法命名。</p>
+<p>&nbsp;<img src="https://img2018.cnblogs.com/blog/1585158/201902/1585158-20190218150306261-891518500.png" alt="" width="554" height="222" style="display: block; margin-left: auto; margin-right: auto;" /></p>
+<p align="center"><span style="font-family: 宋体;">图</span>3.4</p>
+<p>第四种创建对象方式如上图所示，创建一个继承该原型的实例对象。</p>
+<p align="justify"><span style="font-size: 16px;">四.&nbsp;<strong>数据类型和内存图</strong></span></p>
+<p align="justify"><span style="font-family: 宋体;">栈：原始数据类型（</span>Undefined<span style="font-family: 宋体;">，</span><span style="font-family: Calibri;">Null</span><span style="font-family: 宋体;">，</span><span style="font-family: Calibri;">Boolean</span><span style="font-family: 宋体;">，</span><span style="font-family: Calibri;">Number</span><span style="font-family: 宋体;">、</span><span style="font-family: Calibri;">String</span><span style="font-family: 宋体;">）。</span></p>
+<p align="justify">堆：引用数据类型（对象、数组和函数）。</p>
+<p align="justify"><span style="font-family: 宋体;">两种类型的区别是：存储位置不同。原始数据类型是直接存储在栈</span>(stack)<span style="font-family: 宋体;">中的简单数据段，占据空间小、大小固定，属于被频繁使用数据，所以放入栈中存储；引用数据类型是存储在堆</span><span style="font-family: Calibri;">(heap)</span><span style="font-family: 宋体;">中的对象</span><span style="font-family: Calibri;">,</span><span style="font-family: 宋体;">占据空间大、大小不固定。如果存储在栈中，将会影响程序运行的性能；引用数据类型在栈中存储了指针，该指针指向堆中该实体的起始地址。当解释器寻找引用值时，会首先检索其在栈中的地址，取得地址后从堆中获得实体。</span></p>
+<p align="center"><span style="font-family: 宋体;"><img src="https://img2018.cnblogs.com/blog/1585158/201902/1585158-20190218150328735-1171919840.png" alt="" /></span></p>
+<p align="center"><span style="font-family: 宋体;">图</span>4.1</p>
+<p align="justify"><span style="font-size: 16px;">五.&nbsp;<strong>作用域</strong></span></p>
+<p align="justify"><span style="font-family: 宋体;">变量的作用域无非就是两种：全局变量和局部变量。</span></p>
+<p align="justify">全局作用域：最外层函数定义的变量拥有全局作用域，即对任何内部函数来说，都是可以访问的。</p>
+<p align="justify"><span style="font-family: 宋体;">局部作用域：和全局作用域相反，局部作用域一般只在固定的代码片段内可访问到，而对于函数外部是无法访问的，最常见的例如函数内部。需要注意的是，函数内部声明变量的时候，一定要使用</span>var<span style="font-family: 宋体;">或者</span><span style="font-family: Calibri;">let</span><span style="font-family: 宋体;">命令。如果不用的话，你实际上声明了一个全局变量！</span></p>
+<p align="center"><span style="font-family: 宋体;"><img src="https://img2018.cnblogs.com/blog/1585158/201902/1585158-20190218150336642-1155452726.png" alt="" /></span></p>
+<p align="center"><span style="font-family: 宋体;">图</span>5.1</p>
+<p><span style="font-family: 宋体;">只要函数内定义了一个局部变量，函数在解析的时候都会将这个变量</span>&ldquo;提前声明&rdquo;。另外<span style="font-family: Calibri;">Javascript</span><span style="font-family: 宋体;">并没有所谓的块级作用域，</span><span style="font-family: Calibri;">Javascript</span><span style="font-family: 宋体;">的作用域是相对函数而言的，可以称为函数作用域：</span></p>
+<p align="justify"><span style="font-family: 宋体;">全局函数无法查看局部函数的内部细节，但局部函数可以查看其上层的函数细节，直至全局细节。当需要从局部函数查找某一属性或方法时，如果当前作用域没有找到，就会上溯到上层作用域查找，直至全局函数。</span></p>
+<p align="justify">&nbsp;</p>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+      
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
+    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/06/10/hello-world/" class="article-date">
+  	<time datetime="2020-06-10T07:50:55.000Z" itemprop="datePublished">2020-06-10</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/06/10/hello-world/">
         Jerome Zhang Blog
         
       </a>

@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Eval | Jerome Blog</title>
+
+  <!-- keywords -->
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="一.&amp;nbsp;严格模式 eval方法只能在非严格模式中进行使用，在use strict中是不允许使用这个方法的。 二.&amp;nbsp;用法  eval函数会接收一个参数obj，如果obj不是一个字符串，那么eval会直接返回obj。 如果obj是一个字符串，也分两种情况：第一种情况是字符串内部是一个js表达式，且运行结果为一个具体的数值，那么该结果就会返回这个数值，否则就会返回undifined；如">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Eval">
+<meta property="og:url" content="http://example.com/2020/09/16/eval/index.html">
+<meta property="og:site_name" content="Jerome Blog">
+<meta property="og:description" content="一.&amp;nbsp;严格模式 eval方法只能在非严格模式中进行使用，在use strict中是不允许使用这个方法的。 二.&amp;nbsp;用法  eval函数会接收一个参数obj，如果obj不是一个字符串，那么eval会直接返回obj。 如果obj是一个字符串，也分两种情况：第一种情况是字符串内部是一个js表达式，且运行结果为一个具体的数值，那么该结果就会返回这个数值，否则就会返回undifined；如">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img2018.cnblogs.com/blog/1585158/201903/1585158-20190311140048118-1909078352.png">
+<meta property="og:image" content="https://img2018.cnblogs.com/blog/1585158/201903/1585158-20190311140054438-1202431667.png">
+<meta property="og:image" content="https://img2018.cnblogs.com/blog/1585158/201903/1585158-20190311140103625-1389872336.png">
+<meta property="og:image" content="https://img2018.cnblogs.com/blog/1585158/201903/1585158-20190311140115511-1632780760.png">
+<meta property="article:published_time" content="2020-09-16T09:46:02.000Z">
+<meta property="article:modified_time" content="2020-12-16T09:47:47.279Z">
+<meta property="article:author" content="Jerome Zhang">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img2018.cnblogs.com/blog/1585158/201903/1585158-20190311140048118-1909078352.png">
+  
+    <link rel="alternative" href="/atom.xml" title="Jerome Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="http://7xkj1z.com1.z0.glb.clouddn.com/head.jpg">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+<script>
+    (function(){
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+        }
+        else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+  
+<!-- Google Analytics -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-85415703-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+  
+<script src="//cdn.bootcss.com/require.js/2.3.2/require.min.js"></script>
+
+  
+<script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+
+
+  
+<meta name="generator" content="Hexo 5.2.0"></head>
+<body>
+  <div id="container">
+    <div id="particles-js"></div>
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="https://i.loli.net/2020/12/11/tGqjVXEf9b6rM1H.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/"></a></h1>
+		</hgroup>
+
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/about">关于我</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/AndyZjy" title="github">github</a>
+					        
+								<a class="mail" target="_blank" href="/15966685680@163.com" title="mail">mail</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="https://github.com/smackgg/hexo-theme-smackdown">smackdown</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide"></h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="https://i.loli.net/2020/12/11/tGqjVXEf9b6rM1H.jpg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author"></h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/about">关于我</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/AndyZjy" title="github">github</a>
+			        
+						<a class="mail" target="_blank" href="/15966685680@163.com" title="mail">mail</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-eval" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/09/16/eval/" class="article-date">
+  	<time datetime="2020-09-16T09:46:02.000Z" itemprop="datePublished">2020-09-16</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Eval
+      
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+        
+
+        
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p style="text-align: left;" align="center">一.&nbsp;严格模式</p>
+<p>eval<span style="font-family: 宋体;">方法只能在非严格模式中进行使用，在</span><span style="font-family: Calibri;">use strict</span><span style="font-family: 宋体;">中是不允许使用这个方法的。</span></p>
+<p>二.&nbsp;用法</p>
+<ol>
+<li>eval<span style="font-family: 宋体;">函数会接收一个参数</span><span style="font-family: Calibri;">obj</span><span style="font-family: 宋体;">，如果</span><span style="font-family: Calibri;">obj</span><span style="font-family: 宋体;">不是一个字符串，那么</span><span style="font-family: Calibri;">eval</span><span style="font-family: 宋体;">会直接返回</span><span style="font-family: Calibri;">obj</span><span style="font-family: 宋体;">。</span></li>
+<li><span style="font-family: 宋体;">如果</span>obj<span style="font-family: 宋体;">是一个字符串，也分两种情况：第一种情况是字符串内部是一个</span><span style="font-family: Calibri;">js</span><span style="font-family: 宋体;">表达式，且运行结果为一个具体的数值，那么该结果就会返回这个数值，否则就会返回</span><span style="font-family: Calibri;">undifined</span><span style="font-family: 宋体;">；如果内部只是一个单纯的字符串，那么就会返回这个字符串。</span></li>
+<li><span style="font-family: 宋体;">需要注意的点是，</span>js<span style="font-family: 宋体;">声明对象的方法并不能够返回一个具体的数值，必须用括号包起来才可以返回数值，具体如下图：</span></li>
+</ol>
+<p align="center"><strong><span style="font-family: 宋体;"><img src="https://img2018.cnblogs.com/blog/1585158/201903/1585158-20190311140048118-1909078352.png" alt="" /></span></strong></p>
+<p align="center"><strong><span style="font-family: 宋体;">图</span>2.1</strong></p>
+<p>三.&nbsp;局部作用域</p>
+<p>eval<span style="font-family: 宋体;">直接在函数内部使用则返回的是局部变量</span>，如下图：</p>
+<p align="center">&nbsp;<img src="https://img2018.cnblogs.com/blog/1585158/201903/1585158-20190311140054438-1202431667.png" alt="" /></p>
+<p align="center"><strong><span style="font-family: 宋体;">图</span>3.1</strong></p>
+<p><span style="font-family: 宋体;">上图中</span>eval<span style="font-family: 宋体;">直接在函数内部执行，即使在</span><span style="font-family: Calibri;">eval</span><span style="font-family: 宋体;">内部定义了一个全局变量</span><span style="font-family: Calibri;">a</span><span style="font-family: 宋体;">，但是它直接返回了局部变量，所以内部函数并没有执行。</span></p>
+<p><span style="font-family: 宋体;">使在函数内部使用的</span>eval<span style="font-family: 宋体;">成为全局变量的解决方法：</span></p>
+<p>（1）&nbsp;<span style="font-family: 宋体;">利用</span>window.eval<span style="font-family: 宋体;">（）使其成为全局的变量，如下图：</span></p>
+<p>&nbsp;<img src="https://img2018.cnblogs.com/blog/1585158/201903/1585158-20190311140103625-1389872336.png" alt="" style="display: block; margin-left: auto; margin-right: auto;" /></p>
+<p align="center"><strong><span style="font-family: 宋体;">图</span>3.2</strong></p>
+<p align="justify"><span style="font-family: 宋体;">这种情况就是把该变量变为全局变量，这样在执行完函数以后就可以得到这个</span>a<span style="font-family: 宋体;">变量的值。</span></p>
+<p align="justify">（2）&nbsp;<span style="font-family: 宋体;">定义</span>eval<span style="font-family: 宋体;">为全局的，如下图：</span></p>
+<p align="center"><strong><span style="font-family: 宋体;"><img src="https://img2018.cnblogs.com/blog/1585158/201903/1585158-20190311140115511-1632780760.png" alt="" /></span></strong></p>
+<p align="center"><strong><span style="font-family: 宋体;">图</span>3.3</strong></p>
+<p align="justify"><span style="font-family: 宋体;">如上代码就会把</span>b<span style="font-family: 宋体;">变量也变为全局变量，这样就可以在执行完该函数以后获取到</span><span style="font-family: Calibri;">b</span><span style="font-family: 宋体;">变量。</span></p>
+<p align="justify">四.&nbsp;总结</p>
+<p align="justify"><span style="font-family: 宋体;">综上所述，</span>eval<span style="font-family: 宋体;">相当于是在非严格模式下，定义了一种将</span><span style="font-family: Calibri;">JSON</span><span style="font-family: 宋体;">字符串转换为对象的形式，其功能和</span><span style="font-family: Calibri;">JSON.parse()</span><span style="font-family: 宋体;">是相似的。但是区别在于：</span></p>
+<p align="justify"><span style="font-family: 宋体;">当为通过</span>JSON.parse()<span style="font-family: 宋体;">转换为对象后的</span><span style="font-family: Calibri;">JSON</span><span style="font-family: 宋体;">再调用该函数继续进行转换时，就会报错。</span><span style="font-family: Calibri;">eval()</span><span style="font-family: 宋体;">方法不会如此，当传入字符串是对象时，继续使用上述的方式，它会返回原对象。</span></p>
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/10/14/cssVar/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">&lt;</strong>
+      <div class="article-nav-title">
+        
+          巧妙使用CSS变量
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/09/16/jsThree/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">个人JS体系整理（三）</div>
+      <strong class="article-nav-caption">&gt;</strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+      <div class="footer-left">
+        &copy; 2020 Jerome Zhang
+      </div>
+        <div class="footer-right">
+          <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/smackgg/hexo-theme-smackdown" target="_blank">Smackdown</a>
+        </div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+
+<script src="/js/main.js"></script>
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js"></script>
+
+
+  </div>
+</body>
+</html>

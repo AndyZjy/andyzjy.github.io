@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>个人JS体系完善（一） | Jerome Blog</title>
+
+  <!-- keywords -->
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="个人JS体系整理（一） 一.&amp;nbsp;原型 JS每声明一个Function，都有Prototype原型，Prototype原型是函数的一个默认属性，在函数的创建过程中由JS编译器自动添加，也就是说每当生产一个Function对象的时候，就有一个原型Prototype。按照Javascript的说法，Function定义的Object(对象),是一个很特殊的对象，这个使用Function定义的对象">
+<meta property="og:type" content="article">
+<meta property="og:title" content="个人JS体系完善（一）">
+<meta property="og:url" content="http://example.com/2020/07/16/jsOne/index.html">
+<meta property="og:site_name" content="Jerome Blog">
+<meta property="og:description" content="个人JS体系整理（一） 一.&amp;nbsp;原型 JS每声明一个Function，都有Prototype原型，Prototype原型是函数的一个默认属性，在函数的创建过程中由JS编译器自动添加，也就是说每当生产一个Function对象的时候，就有一个原型Prototype。按照Javascript的说法，Function定义的Object(对象),是一个很特殊的对象，这个使用Function定义的对象">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img2018.cnblogs.com/blog/1585158/201902/1585158-20190218150016897-1344948422.png">
+<meta property="og:image" content="https://img2018.cnblogs.com/blog/1585158/201902/1585158-20190218150026943-1893945414.png">
+<meta property="og:image" content="https://img2018.cnblogs.com/blog/1585158/201902/1585158-20190218150038280-931538109.png">
+<meta property="og:image" content="https://img2018.cnblogs.com/blog/1585158/201902/1585158-20190218150052438-2118839481.png">
+<meta property="og:image" content="https://img2018.cnblogs.com/blog/1585158/201902/1585158-20190218150114890-1840942670.png">
+<meta property="og:image" content="https://img2018.cnblogs.com/blog/1585158/201902/1585158-20190218150126187-642172313.png">
+<meta property="og:image" content="https://img2018.cnblogs.com/blog/1585158/201902/1585158-20190218150231239-1503449038.png">
+<meta property="og:image" content="https://img2018.cnblogs.com/blog/1585158/201902/1585158-20190218150246843-1311630024.png">
+<meta property="og:image" content="https://img2018.cnblogs.com/blog/1585158/201902/1585158-20190218150253989-1288881521.png">
+<meta property="og:image" content="https://img2018.cnblogs.com/blog/1585158/201902/1585158-20190218150259599-1142192596.png">
+<meta property="og:image" content="https://img2018.cnblogs.com/blog/1585158/201902/1585158-20190218150306261-891518500.png">
+<meta property="og:image" content="https://img2018.cnblogs.com/blog/1585158/201902/1585158-20190218150328735-1171919840.png">
+<meta property="og:image" content="https://img2018.cnblogs.com/blog/1585158/201902/1585158-20190218150336642-1155452726.png">
+<meta property="article:published_time" content="2020-07-16T09:42:07.000Z">
+<meta property="article:modified_time" content="2020-12-16T09:44:49.870Z">
+<meta property="article:author" content="Jerome Zhang">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img2018.cnblogs.com/blog/1585158/201902/1585158-20190218150016897-1344948422.png">
+  
+    <link rel="alternative" href="/atom.xml" title="Jerome Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="http://7xkj1z.com1.z0.glb.clouddn.com/head.jpg">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+<script>
+    (function(){
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+        }
+        else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+  
+<!-- Google Analytics -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-85415703-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+  
+<script src="//cdn.bootcss.com/require.js/2.3.2/require.min.js"></script>
+
+  
+<script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+
+
+  
+<meta name="generator" content="Hexo 5.2.0"></head>
+<body>
+  <div id="container">
+    <div id="particles-js"></div>
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="https://i.loli.net/2020/12/11/tGqjVXEf9b6rM1H.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/"></a></h1>
+		</hgroup>
+
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/about">关于我</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/AndyZjy" title="github">github</a>
+					        
+								<a class="mail" target="_blank" href="/15966685680@163.com" title="mail">mail</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="https://github.com/smackgg/hexo-theme-smackdown">smackdown</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide"></h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="https://i.loli.net/2020/12/11/tGqjVXEf9b6rM1H.jpg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author"></h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/about">关于我</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/AndyZjy" title="github">github</a>
+			        
+						<a class="mail" target="_blank" href="/15966685680@163.com" title="mail">mail</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-jsOne" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/07/16/jsOne/" class="article-date">
+  	<time datetime="2020-07-16T09:42:07.000Z" itemprop="datePublished">2020-07-16</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      个人JS体系完善（一）
+      
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+        
+
+        
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p align="center"><span style="font-size: 18px;"><strong><span style="font-family: 宋体;">个人</span>JS<span style="font-family: 宋体;">体系整理（一）</span></strong></span></p>
+<p align="justify"><span style="font-size: 16px;">一.&nbsp;<strong>原型</strong></span></p>
+<p align="justify">JS<span style="font-family: 宋体;">每声明一个</span><span style="font-family: Calibri;">Function</span><span style="font-family: 宋体;">，都有</span><span style="font-family: Calibri;">Prototype</span><span style="font-family: 宋体;">原型，</span><span style="font-family: Calibri;">Prototype</span><span style="font-family: 宋体;">原型是函数的一个默认属性，在函数的创建过程中由</span><span style="font-family: Calibri;">JS</span><span style="font-family: 宋体;">编译器自动添加，也就是说每当生产一个</span><span style="font-family: Calibri;">Function</span><span style="font-family: 宋体;">对象的时候，就有一个原型</span><span style="font-family: Calibri;">Prototype</span><span style="font-family: 宋体;">。按照</span><span style="font-family: Calibri;">Javascript</span><span style="font-family: 宋体;">的说法，</span><span style="font-family: Calibri;">Function</span><span style="font-family: 宋体;">定义的</span><span style="font-family: Calibri;">Object(</span><span style="font-family: 宋体;">对象</span><span style="font-family: Calibri;">),</span><span style="font-family: 宋体;">是一个很特殊的对象，这个使用</span><span style="font-family: Calibri;">Function</span><span style="font-family: 宋体;">定义的对象与使用</span><span style="font-family: Calibri;">New</span><span style="font-family: 宋体;">操作符生成的对象之间有一个重要的区别，这个区别就是</span><span style="font-family: Calibri;">Function</span><span style="font-family: 宋体;">定义的对象有一个</span><span style="font-family: Calibri;">Prototype</span><span style="font-family: 宋体;">属性，称之为函数对象，而使用</span><span style="font-family: Calibri;">New</span><span style="font-family: 宋体;">生成的对象就没有这个</span><span style="font-family: Calibri;">Prototype</span><span style="font-family: 宋体;">属性，称之为普通对象。</span></p>
+<p align="center"><span style="font-family: 宋体;"><img src="https://img2018.cnblogs.com/blog/1585158/201902/1585158-20190218150016897-1344948422.png" alt="" width="554" height="206" /></span></p>
+<p align="center"><span style="font-family: 宋体;">图</span>1.1</p>
+<p><span style="font-family: 宋体;">如上图所示，第一个</span>Console<span style="font-family: 宋体;">结果为</span><span style="font-family: Calibri;">Undifined</span><span style="font-family: 宋体;">，证明了</span><span style="font-family: Calibri;">New</span><span style="font-family: 宋体;">的对象是没有原型</span>Prototype<span style="font-family: 宋体;">的；第二个</span><span style="font-family: Calibri;">Console</span><span style="font-family: 宋体;">结果为增加原型</span><span style="font-family: Calibri;">Name</span><span style="font-family: 宋体;">以后的原函数，证明了只有函数对象才具有</span>原型Prototype<span style="font-family: 宋体;">；第三个</span><span style="font-family: Calibri;">Console</span><span style="font-family: 宋体;">的结果为</span>&rsquo;hangzhou&rsquo;<span style="font-family: 宋体;">，证明了通过原型增加的属性是存在的；第四个</span>Console<span style="font-family: 宋体;">的结果为</span>&rsquo;hangzhou&rsquo;，证明了通过原型增加的属性，是可以在该对象所具有的方法里面进行调用获取到的。</p>
+<p align="center"><span style="font-family: 宋体;"><img src="https://img2018.cnblogs.com/blog/1585158/201902/1585158-20190218150026943-1893945414.png" alt="" /></span></p>
+<p align="center"><span style="font-family: 宋体;">图</span>1.2</p>
+<p align="justify">如上图所示，如果原函数本身的属性或方法与利用原型增加的属性或方法重名时，默认调用的依旧是该函数对象本身的属性或者方法，即函数本身的属性或者方法的优先级高于原型的属性或者方法。</p>
+<p align="justify"><span style="font-size: 16px;">二.&nbsp;<strong>原型链</strong></span></p>
+<p align="justify"><span style="font-family: 宋体;">官方对于原型链的解释是原型链是实现继承的主要方法，其基本思想是利用原型让一个引用类型继承另一个应用类型的属性和方法。通俗一些理解，每个对象都会在其内部初始化一个属性，就是</span>Prototype(<span style="font-family: 宋体;">原型</span><span style="font-family: Calibri;">)</span><span style="font-family: 宋体;">，当我们访问一个对象的属性时， 如果这个对象内部不存在这个属性，那么他就会去</span><span style="font-family: Calibri;">Prototype</span><span style="font-family: 宋体;">里找这个属性，这个</span><span style="font-family: Calibri;">Prototype</span><span style="font-family: 宋体;">又会有自己的</span><span style="font-family: Calibri;">Prototype</span><span style="font-family: 宋体;">， 于是就这样一直找下去，也就是我们平时所说的原型链的概念。</span></p>
+<p align="justify">提到原型链，就要提一个词_proto_<span style="font-family: 宋体;">，</span><span style="font-family: 宋体;">它是基本对象的属性，相对应的就是每一个函数对象都有一个</span><span style="font-family: Arial;">自己的</span>Prototype<span style="font-family: Arial;">原型</span><span style="font-family: 宋体;">，</span><span style="font-family: 宋体;">由于函数对象也属于基本对象，所以函数对象也有</span>_proto_<span style="font-family: 宋体;">，</span><span style="font-family: Arial;">每当去定义一个</span>Prototype<span style="font-family: Arial;">的时候，就相当于把该实例的</span>__proto__指向一个结构体，那么这个被指向结构体就称为该实例的原型。&nbsp;</p>
+<p align="center"><span style="font-family: 宋体;"><img src="https://img2018.cnblogs.com/blog/1585158/201902/1585158-20190218150038280-931538109.png" alt="" /></span></p>
+<p align="center"><span style="font-family: 宋体;">图</span>2.1</p>
+<p align="justify"><span style="font-family: 宋体;">当你定义一个函数对象的时候，其内部就有这样一个链表关系。声明</span>foo<span style="font-family: 宋体;">对象，自带了</span><span style="font-family: Calibri;">_proto_</span><span style="font-family: 宋体;">的属性，而这个属性指向了</span><span style="font-family: Calibri;">Prototype</span><span style="font-family: 宋体;">，从而实现对象的扩展（例如继承等操作）。</span></p>
+<p align="center"><span style="font-family: 宋体;"><img src="https://img2018.cnblogs.com/blog/1585158/201902/1585158-20190218150052438-2118839481.png" alt="" width="412" height="549" /></span></p>
+<p align="center"><span style="font-family: 宋体;">图</span>2.2</p>
+<p align="justify"><span style="font-family: 宋体;">如上图所示，一个没有继承操作的函数的</span>_proto_<span style="font-family: 宋体;">都会指向</span><span style="font-family: Calibri;">Object.Prototype</span><span style="font-family: 宋体;">，而</span><span style="font-family: Calibri;">Object.Prototype</span><span style="font-family: 宋体;">都会指向</span><span style="font-family: Calibri;">Null</span><span style="font-family: 宋体;">。</span></p>
+<p align="center"><span style="font-family: 宋体;"><img src="https://img2018.cnblogs.com/blog/1585158/201902/1585158-20190218150114890-1840942670.png" alt="" width="305" height="246" /></span></p>
+<p align="center"><span style="font-family: 宋体;">图</span>2.3</p>
+<p align="justify"><span style="font-family: 宋体;">如上图所示，定义两个函数对象</span>A<span style="font-family: 宋体;">和</span><span style="font-family: Calibri;">B</span><span style="font-family: 宋体;">，每个对象分别具有一个属性和方法。他们两个函数对象的区别是</span><span style="font-family: Calibri;">B</span><span style="font-family: 宋体;">继承了</span><span style="font-family: Calibri;">A</span><span style="font-family: 宋体;">，而继承是通过创建</span><span style="font-family: Calibri;">A</span><span style="font-family: 宋体;">的实例，并将实例赋给</span><span style="font-family: Calibri;">B.Prototype</span><span style="font-family: 宋体;">实现的。实现的本质是重写原型的对象，代之以一个新的类型的实例。换句话说，原来存在于</span><span style="font-family: Calibri;">A</span><span style="font-family: 宋体;">的实例中的所有属性和方法，现在也存在于</span><span style="font-family: Calibri;">B.Prototype</span><span style="font-family: 宋体;">中了。在确立了继承关系之后，我们给</span><span style="font-family: Calibri;">B.Prototype</span><span style="font-family: 宋体;">添加了一个方法，这样就继承</span><span style="font-family: Calibri;">A</span><span style="font-family: 宋体;">的属性和方法的基础上又添加了一个新方法。然后继续创建一个</span><span style="font-family: Calibri;">B</span><span style="font-family: 宋体;">的实例</span><span style="font-family: Calibri;">C</span><span style="font-family: 宋体;">，这样</span><span style="font-family: Calibri;">C</span><span style="font-family: 宋体;">就具有了</span><span style="font-family: Calibri;">B</span><span style="font-family: 宋体;">的全部方法和属性，所以</span><span style="font-family: Calibri;">Console</span><span style="font-family: 宋体;">的结果分别是</span><span style="font-family: Calibri;">111</span><span style="font-family: 宋体;">与</span><span style="font-family: Calibri;">222</span><span style="font-family: 宋体;">。</span></p>
+<p align="justify">前端面试拓展：</p>
+<p align="center"><span style="font-family: 宋体;"><img src="https://img2018.cnblogs.com/blog/1585158/201902/1585158-20190218150126187-642172313.png" alt="" /></span></p>
+<p align="center"><span style="font-family: 宋体;">图</span>2.4</p>
+<p align="justify">p<span style="font-family: 宋体;">没有</span><span style="font-family: Calibri;">b</span><span style="font-family: 宋体;">属性，会一直通过</span><span style="font-family: Calibri;">__proto__</span><span style="font-family: 宋体;">向上查找，最后当查找到</span><span style="font-family: Calibri;">Object.Prototype</span><span style="font-family: 宋体;">时找到，最后打印出</span><span style="font-family: Calibri;">b</span><span style="font-family: 宋体;">，向上查找过程中，得到的是</span><span style="font-family: Calibri;">Object.Prototype</span><span style="font-family: 宋体;">，而不是</span><span style="font-family: Calibri;">Function.Prototype</span><span style="font-family: 宋体;">，所以找不到</span><span style="font-family: Calibri;">a</span><span style="font-family: 宋体;">属性，所以结果为</span><span style="font-family: Calibri;">Undefined</span><span style="font-family: 宋体;">，这就是原型链，通过</span><span style="font-family: Calibri;">__proto__</span><span style="font-family: 宋体;">向上进行查找，最终到</span><span style="font-family: Calibri;">Null</span><span style="font-family: 宋体;">结束。最终逻辑即下图：</span></p>
+<p align="center"><span style="font-family: 宋体;"><img src="https://img2018.cnblogs.com/blog/1585158/201902/1585158-20190218150231239-1503449038.png" alt="" width="833" height="328" /></span></p>
+<p align="center"><span style="font-family: 宋体;">图</span>2.5</p>
+<p align="justify"><span style="font-size: 16px;">三.&nbsp;<strong>对象简介</strong></span></p>
+<p>&nbsp;<span style="font-family: 宋体;">对象的定义：对象是</span>Javascript<span style="font-family: 宋体;">的一个基本数据类型，是一种复合值，它将很多值（原始值或者其他对象）聚合在一起，可通过名字访问这些值。即属性的无序集合。</span></p>
+<p><span style="font-family: 宋体;">第一：</span>Javascript<span style="font-family: 宋体;">对象是基本数据类型之一，是复合类型；</span></p>
+<p><span style="font-family: 宋体;">第二：</span>Javascript<span style="font-family: 宋体;">中几乎所有事物都是做对象；</span></p>
+<p><span style="font-family: 宋体;">第三：</span>Javascript<span style="font-family: 宋体;">的对象是拥有属性和方法的数据；</span></p>
+<p><span style="font-family: 宋体;">第四：</span>Javascript <span style="font-family: 宋体;">中的对象可以简单理解成</span><span style="font-family: Calibri;">"</span><span style="font-family: 宋体;">名称</span><span style="font-family: Calibri;">:</span><span style="font-family: 宋体;">值</span><span style="font-family: Calibri;">"</span><span style="font-family: 宋体;">对</span><span style="font-family: Calibri;">(name:value)</span><span style="font-family: 宋体;">。名称（</span><span style="font-family: Calibri;">name</span><span style="font-family: 宋体;">）：</span><span style="font-family: Calibri;">"</span><span style="font-family: 宋体;">名称</span><span style="font-family: Calibri;">"</span><span style="font-family: 宋体;">部分是一个 </span><span style="font-family: Calibri;">Javascript </span><span style="font-family: 宋体;">字符串</span></p>
+<p align="center"><span style="font-family: 宋体;"><img src="https://img2018.cnblogs.com/blog/1585158/201902/1585158-20190218150246843-1311630024.png" alt="" /></span></p>
+<p align="center"><span style="font-family: 宋体;">图</span>3.1</p>
+<p>第一种创建对象方式如上图所示，直接创建一个对象，或者叫做对象直接量、字面量。</p>
+<p align="center"><span style="font-family: 宋体;"><img src="https://img2018.cnblogs.com/blog/1585158/201902/1585158-20190218150253989-1288881521.png" alt="" /></span></p>
+<p align="center"><span style="font-family: 宋体;">图</span>3.2</p>
+<p><span style="font-family: 宋体;">第二种创建对象方式如上图所示，通过</span>new.object<span style="font-family: 宋体;">创建对象，该方法只能创建系统自带的对象，如：</span><span style="font-family: Calibri;">new Object(), Array(), Number(),Boolean(), Date()...</span></p>
+<p align="center"><span style="font-family: 宋体;"><img src="https://img2018.cnblogs.com/blog/1585158/201902/1585158-20190218150259599-1142192596.png" alt="" /></span></p>
+<p align="center"><span style="font-family: 宋体;">图</span>3.3</p>
+<p>第三种创建对象方式如上图所示，通过构造函数的形式创建对象，构造函数一般使用驼峰式命名方法命名。</p>
+<p>&nbsp;<img src="https://img2018.cnblogs.com/blog/1585158/201902/1585158-20190218150306261-891518500.png" alt="" width="554" height="222" style="display: block; margin-left: auto; margin-right: auto;" /></p>
+<p align="center"><span style="font-family: 宋体;">图</span>3.4</p>
+<p>第四种创建对象方式如上图所示，创建一个继承该原型的实例对象。</p>
+<p align="justify"><span style="font-size: 16px;">四.&nbsp;<strong>数据类型和内存图</strong></span></p>
+<p align="justify"><span style="font-family: 宋体;">栈：原始数据类型（</span>Undefined<span style="font-family: 宋体;">，</span><span style="font-family: Calibri;">Null</span><span style="font-family: 宋体;">，</span><span style="font-family: Calibri;">Boolean</span><span style="font-family: 宋体;">，</span><span style="font-family: Calibri;">Number</span><span style="font-family: 宋体;">、</span><span style="font-family: Calibri;">String</span><span style="font-family: 宋体;">）。</span></p>
+<p align="justify">堆：引用数据类型（对象、数组和函数）。</p>
+<p align="justify"><span style="font-family: 宋体;">两种类型的区别是：存储位置不同。原始数据类型是直接存储在栈</span>(stack)<span style="font-family: 宋体;">中的简单数据段，占据空间小、大小固定，属于被频繁使用数据，所以放入栈中存储；引用数据类型是存储在堆</span><span style="font-family: Calibri;">(heap)</span><span style="font-family: 宋体;">中的对象</span><span style="font-family: Calibri;">,</span><span style="font-family: 宋体;">占据空间大、大小不固定。如果存储在栈中，将会影响程序运行的性能；引用数据类型在栈中存储了指针，该指针指向堆中该实体的起始地址。当解释器寻找引用值时，会首先检索其在栈中的地址，取得地址后从堆中获得实体。</span></p>
+<p align="center"><span style="font-family: 宋体;"><img src="https://img2018.cnblogs.com/blog/1585158/201902/1585158-20190218150328735-1171919840.png" alt="" /></span></p>
+<p align="center"><span style="font-family: 宋体;">图</span>4.1</p>
+<p align="justify"><span style="font-size: 16px;">五.&nbsp;<strong>作用域</strong></span></p>
+<p align="justify"><span style="font-family: 宋体;">变量的作用域无非就是两种：全局变量和局部变量。</span></p>
+<p align="justify">全局作用域：最外层函数定义的变量拥有全局作用域，即对任何内部函数来说，都是可以访问的。</p>
+<p align="justify"><span style="font-family: 宋体;">局部作用域：和全局作用域相反，局部作用域一般只在固定的代码片段内可访问到，而对于函数外部是无法访问的，最常见的例如函数内部。需要注意的是，函数内部声明变量的时候，一定要使用</span>var<span style="font-family: 宋体;">或者</span><span style="font-family: Calibri;">let</span><span style="font-family: 宋体;">命令。如果不用的话，你实际上声明了一个全局变量！</span></p>
+<p align="center"><span style="font-family: 宋体;"><img src="https://img2018.cnblogs.com/blog/1585158/201902/1585158-20190218150336642-1155452726.png" alt="" /></span></p>
+<p align="center"><span style="font-family: 宋体;">图</span>5.1</p>
+<p><span style="font-family: 宋体;">只要函数内定义了一个局部变量，函数在解析的时候都会将这个变量</span>&ldquo;提前声明&rdquo;。另外<span style="font-family: Calibri;">Javascript</span><span style="font-family: 宋体;">并没有所谓的块级作用域，</span><span style="font-family: Calibri;">Javascript</span><span style="font-family: 宋体;">的作用域是相对函数而言的，可以称为函数作用域：</span></p>
+<p align="justify"><span style="font-family: 宋体;">全局函数无法查看局部函数的内部细节，但局部函数可以查看其上层的函数细节，直至全局细节。当需要从局部函数查找某一属性或方法时，如果当前作用域没有找到，就会上溯到上层作用域查找，直至全局函数。</span></p>
+<p align="justify">&nbsp;</p>
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/08/16/jsTwo/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">&lt;</strong>
+      <div class="article-nav-title">
+        
+          个人JS体系整理（二）
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/06/10/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Jerome Zhang Blog</div>
+      <strong class="article-nav-caption">&gt;</strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+      <div class="footer-left">
+        &copy; 2020 Jerome Zhang
+      </div>
+        <div class="footer-right">
+          <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/smackgg/hexo-theme-smackdown" target="_blank">Smackdown</a>
+        </div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+
+<script src="/js/main.js"></script>
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js"></script>
+
+
+  </div>
+</body>
+</html>

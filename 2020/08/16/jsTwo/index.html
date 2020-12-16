@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>个人JS体系整理（二） | Jerome Blog</title>
+
+  <!-- keywords -->
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="一.&amp;nbsp;eval 　　eval()函数计算JavaScript字符串，并把它作为脚本代码来执行。如果参数是一个表达式，eval()函数将执行表达式。如果参数是Javascript语句，eval()将执行Javascript语句。  图1.1 　　如上图所示，第一个eval内部为一个函数表达式，在执行该函数的同时，定义了两个全局变量X和Y，所以结果分别为200、4、27。 　　由于因为它会执">
+<meta property="og:type" content="article">
+<meta property="og:title" content="个人JS体系整理（二）">
+<meta property="og:url" content="http://example.com/2020/08/16/jsTwo/index.html">
+<meta property="og:site_name" content="Jerome Blog">
+<meta property="og:description" content="一.&amp;nbsp;eval 　　eval()函数计算JavaScript字符串，并把它作为脚本代码来执行。如果参数是一个表达式，eval()函数将执行表达式。如果参数是Javascript语句，eval()将执行Javascript语句。  图1.1 　　如上图所示，第一个eval内部为一个函数表达式，在执行该函数的同时，定义了两个全局变量X和Y，所以结果分别为200、4、27。 　　由于因为它会执">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img2018.cnblogs.com/blog/1585158/201903/1585158-20190305164117587-1497184678.png">
+<meta property="og:image" content="https://img2018.cnblogs.com/blog/1585158/201903/1585158-20190305164140368-459112732.png">
+<meta property="og:image" content="https://img2018.cnblogs.com/blog/1585158/201903/1585158-20190305164158198-1493204851.png">
+<meta property="og:image" content="https://img2018.cnblogs.com/blog/1585158/201903/1585158-20190305164206272-1651298268.png">
+<meta property="og:image" content="https://img2018.cnblogs.com/blog/1585158/201903/1585158-20190305164212897-496780305.png">
+<meta property="og:image" content="https://img2018.cnblogs.com/blog/1585158/201903/1585158-20190305164304068-868605781.png">
+<meta property="og:image" content="https://img2018.cnblogs.com/blog/1585158/201903/1585158-20190305164322090-192449816.png">
+<meta property="og:image" content="https://img2018.cnblogs.com/blog/1585158/201903/1585158-20190305164459157-896201755.png">
+<meta property="og:image" content="https://img2018.cnblogs.com/blog/1585158/201903/1585158-20190305164604546-1830244593.png">
+<meta property="og:image" content="https://img2018.cnblogs.com/blog/1585158/201903/1585158-20190305164628448-1800687919.png">
+<meta property="og:image" content="https://img2018.cnblogs.com/blog/1585158/201903/1585158-20190305164637016-1919590125.png">
+<meta property="og:image" content="https://img2018.cnblogs.com/blog/1585158/201903/1585158-20190305164643503-40524234.png">
+<meta property="article:published_time" content="2020-08-16T09:43:37.000Z">
+<meta property="article:modified_time" content="2020-12-16T09:44:53.448Z">
+<meta property="article:author" content="Jerome Zhang">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img2018.cnblogs.com/blog/1585158/201903/1585158-20190305164117587-1497184678.png">
+  
+    <link rel="alternative" href="/atom.xml" title="Jerome Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="http://7xkj1z.com1.z0.glb.clouddn.com/head.jpg">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+<script>
+    (function(){
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+        }
+        else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+  
+<!-- Google Analytics -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-85415703-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+  
+<script src="//cdn.bootcss.com/require.js/2.3.2/require.min.js"></script>
+
+  
+<script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+
+
+  
+<meta name="generator" content="Hexo 5.2.0"></head>
+<body>
+  <div id="container">
+    <div id="particles-js"></div>
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="https://i.loli.net/2020/12/11/tGqjVXEf9b6rM1H.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/"></a></h1>
+		</hgroup>
+
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/about">关于我</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/AndyZjy" title="github">github</a>
+					        
+								<a class="mail" target="_blank" href="/15966685680@163.com" title="mail">mail</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="https://github.com/smackgg/hexo-theme-smackdown">smackdown</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide"></h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="https://i.loli.net/2020/12/11/tGqjVXEf9b6rM1H.jpg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author"></h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/about">关于我</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/AndyZjy" title="github">github</a>
+			        
+						<a class="mail" target="_blank" href="/15966685680@163.com" title="mail">mail</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-jsTwo" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/08/16/jsTwo/" class="article-date">
+  	<time datetime="2020-08-16T09:43:37.000Z" itemprop="datePublished">2020-08-16</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      个人JS体系整理（二）
+      
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+        
+
+        
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p style="text-align: left;" align="center">一.&nbsp;<strong>eval</strong></p>
+<p>　　eval()<span style="font-family: 宋体;">函数计算</span><span style="font-family: Calibri;">JavaScript</span><span style="font-family: 宋体;">字符串，并把它作为脚本代码来执行。如果参数是一个表达式，</span><span style="font-family: Calibri;">eval()</span><span style="font-family: 宋体;">函数将执行表达式。如果参数是</span><span style="font-family: Calibri;">Javascript</span><span style="font-family: 宋体;">语句，</span><span style="font-family: Calibri;">eval()</span><span style="font-family: 宋体;">将执行</span><span style="font-family: Calibri;">Javascript</span><span style="font-family: 宋体;">语句。</span></p>
+<p align="center"><span style="font-family: 宋体;"><img src="https://img2018.cnblogs.com/blog/1585158/201903/1585158-20190305164117587-1497184678.png" alt="" /></span></p>
+<p align="center"><span style="font-family: 宋体;">图</span>1.1</p>
+<p align="justify"><span style="font-family: 宋体;">　　如上图所示，第一个</span>eval<span style="font-family: 宋体;">内部为一个函数表达式，在执行该函数的同时，定义了两个全局变量</span><span style="font-family: Calibri;">X</span><span style="font-family: 宋体;">和</span><span style="font-family: Calibri;">Y</span><span style="font-family: 宋体;">，所以结果分别为</span><span style="font-family: Calibri;">200</span><span style="font-family: 宋体;">、</span><span style="font-family: Calibri;">4</span><span style="font-family: 宋体;">、</span><span style="font-family: Calibri;">27</span><span style="font-family: 宋体;">。</span></p>
+<p align="justify"><span style="font-family: 宋体;">　　由于因为它会执行任意传给它的代码，在代码字符串未知或者是来自一个不信任的源时，会导致安全问题，同时非常耗性能（它会执行两次</span>2<span style="font-family: 宋体;">次，一次解析成</span><span style="font-family: Calibri;">js</span><span style="font-family: 宋体;">语句，一次执行），最重要的是，</span>99.9%<span style="font-family: 宋体;">使用</span><span style="font-family: Calibri;">eval </span><span style="font-family: 宋体;">的场景都有不使用</span><span style="font-family: Calibri;">eval</span><span style="font-family: 宋体;">的解决方案</span>，所以<span style="font-family: 宋体;">在任何情况下我们都应该避免使用</span>eval<span style="font-family: 宋体;">函数。</span></p>
+<p align="justify">二.&nbsp;<strong>null<span style="font-family: 宋体;">与</span><span style="font-family: Calibri;">undefined </span><span style="font-family: 宋体;">的区别</span></strong></p>
+<p align="justify">　　(1)&nbsp;null<span style="font-family: 宋体;">表示一个对象是&ldquo;没有值&rdquo;的值，也就是值为&ldquo;空&rdquo;；</span><span style="font-family: Calibri;">undefined</span><span style="font-family: 宋体;">表示一个变量声明了没有初始化</span><span style="font-family: Calibri;">(</span><span style="font-family: 宋体;">即没有赋值</span><span style="font-family: Calibri;">)</span><span style="font-family: 宋体;">。</span></p>
+<p align="justify">　　(2)&nbsp;undefined<span style="font-family: 宋体;">不是一个有效的</span><span style="font-family: Calibri;">JSON</span><span style="font-family: 宋体;">，而</span><span style="font-family: Calibri;">null</span><span style="font-family: 宋体;">是；</span><span style="font-family: Calibri;">undefined</span><span style="font-family: 宋体;">的类型</span><span style="font-family: Calibri;">(typeof)</span><span style="font-family: 宋体;">是</span><span style="font-family: Calibri;">undefined</span><span style="font-family: 宋体;">，而</span><span style="font-family: Calibri;">null</span><span style="font-family: 宋体;">的类型</span><span style="font-family: Calibri;">(typeof)</span><span style="font-family: 宋体;">是</span><span style="font-family: Calibri;">object</span><span style="font-family: 宋体;">。</span></p>
+<p align="justify">　　(3)&nbsp;<span style="font-family: 宋体;">在验证</span>null<span style="font-family: 宋体;">时，一定要使用&ldquo;</span><span style="font-family: Calibri;">===</span><span style="font-family: 宋体;">&rdquo; ，因为&ldquo;</span><span style="font-family: Calibri;">==</span><span style="font-family: 宋体;">&rdquo;无法分别</span><span style="font-family: Calibri;">null</span><span style="font-family: 宋体;">和</span><span style="font-family: Calibri;">undefined!</span></p>
+<p align="center"><span style="font-family: 宋体;"><span style="font-family: 'PingFang SC', 'Helvetica Neue', Helvetica, Arial, sans-serif;"><img src="https://img2018.cnblogs.com/blog/1585158/201903/1585158-20190305164140368-459112732.png" alt="" /></span></span></p>
+<p style="text-align: center;">图2.1</p>
+<p style="text-align: left;" align="center"><span style="font-family: 宋体;"><span style="font-family: 'PingFang SC', 'Helvetica Neue', Helvetica, Arial, sans-serif;">三.&nbsp;</span><strong style="font-family: 'PingFang SC', 'Helvetica Neue', Helvetica, Arial, sans-serif;">事件与事件流</strong></span></p>
+<p align="justify">　　(1)&nbsp;事件</p>
+<p align="justify"><span style="font-family: 宋体;">　　事件是文档或者浏览器窗口中发生的，特定的交互瞬间，也可以理解为是用户或浏览器自身执行的某种动作，如</span>click,change<span style="font-family: 宋体;">和</span><span style="font-family: Calibri;">hover</span><span style="font-family: 宋体;">都是事件的名字，同时事件是</span><span style="font-family: Calibri;">javaScript</span><span style="font-family: 宋体;">和</span><span style="font-family: Calibri;">DOM</span><span style="font-family: 宋体;">之间交互的桥梁。</span></p>
+<p align="justify">　　(2)&nbsp;事件流</p>
+<p align="justify"><span style="font-family: 宋体;">　　事件发生时会在元素节点与根节点之间按照特定的顺序传播，路径所经过的所有节点都会收到该事件，这个传播过程即</span>DOM<span style="font-family: 宋体;">事件流</span>。事件流有两种模型，即捕获型事件流和冒泡型事件流。</p>
+<p align="justify"><span style="font-family: 宋体;">　　冒泡型事件流：事件的传播是从最特定的事件目标到最不特定的事件目标。即从</span>DOM<span style="font-family: 宋体;">树的叶子到根。</span></p>
+<p align="justify"><span style="font-family: 宋体;">　　捕获型事件流：事件的传播是从最不特定的事件目标到最特定的事件目标。即从</span>DOM<span style="font-family: 宋体;">树的根到叶子。</span></p>
+<p align="justify"><img src="https://img2018.cnblogs.com/blog/1585158/201903/1585158-20190305164158198-1493204851.png" alt="" style="display: block; margin-left: auto; margin-right: auto;" /></p>
+<p align="center"><span style="font-family: 宋体;">图</span>3.1</p>
+<p><span style="font-family: 宋体;">　　如上图所示，</span>DOM标准采用捕获+冒泡，两种事件流都会触发DOM的所有对象，从document对象开始，也在document对象结束。DOM标准规定事件流包括三个阶段：事件捕获阶段、处于目标阶段和事件冒泡阶段。</p>
+<p>　　(1)&nbsp;<span style="font-family: 宋体;">事件捕获阶段：实际目标（</span>&lt;div&gt;）在捕获阶段不会接收事件。也就是在捕获阶段，事件从document到&lt;html&gt;再到&lt;body&gt;就停止了。</p>
+<p>　　(2)&nbsp;<span style="font-family: 宋体;">处于目标阶段：事件在</span>&lt;div&gt;上发生并处理。但是事件处理会被看成是冒泡阶段的一部分。</p>
+<p>　　(3)&nbsp;冒泡阶段：事件又传播回文档。</p>
+<p>　　来个例子搞一下，如下图：</p>
+<p align="center"><span style="font-family: 宋体;"><img src="https://img2018.cnblogs.com/blog/1585158/201903/1585158-20190305164206272-1651298268.png" alt="" /></span></p>
+<p align="center"><span style="font-family: 宋体;">图</span>3.2</p>
+<p align="justify"><span style="font-family: 宋体;">　　上图点击</span>btn1的区域，会先弹出&ldquo;btn1&rdquo;，紧跟着弹出&ldquo;content&rdquo;，这就是一个最典型的冒泡事件。</p>
+<p align="center"><span style="font-family: 宋体;"><img src="https://img2018.cnblogs.com/blog/1585158/201903/1585158-20190305164212897-496780305.png" alt="" /></span></p>
+<p align="center"><span style="font-family: 宋体;">图</span>3.3</p>
+<p><span style="font-family: 宋体;">　　上图代码运行结果为：先弹出</span>&ldquo;btn1&rdquo;,然后弹出&ldquo;btn2&rdquo;,最后弹出&ldquo;content &rdquo;。它与前一个代码的区别是，一个是绑定，一个是注册。即DOM元素只能绑定一个事件，类似变量，后面的会把前面的覆盖掉；但是DOM元素可以注册多个事件，即在注册第一个事件的时候，同时注册了第二个事件，所以在执行的时候，会从第二个（也就是当前元素的最后一个注册事件）开始执行，直到执行完第三个事件。</p>
+<p align="justify">四.&nbsp;<strong>闭包</strong></p>
+<p align="justify"><span style="font-family: 宋体;">　　闭包，官方对闭包的解释是：一个拥有许多变量和绑定了这些变量的环境的表达式（通常是一个函数）</span><span style="font-family: 宋体;">。</span><span style="font-family: 宋体;">因而，这些变量也是该表达式的一部分。闭包的特点如下：</span></p>
+<ol>
+<li><span style="font-family: 宋体;">作为一个函数变量的一个引用，当函数返回时，其处于激活状态。</span></li>
+<li><span style="font-family: 宋体;">　</span> 2. <span style="font-family: 宋体;">一个闭包就是当一个函数返回时，一个没有释放资源的栈区。</span></li>
+</ol>
+<p align="justify"><span style="font-family: 宋体;">　　简单的说，</span>Javascript<span style="font-family: 宋体;">允许使用内部函数</span><span style="font-family: 宋体;">，</span><span style="font-family: 宋体;">即函数定义和函数表达式位于另一个函数的函数体内。而且，这些内部函数可以访问它们所在的外部函数中声明的所有局部变量、参数和声明的其他内部函数。当其中一个这样的内部函数在包含它们的外部函数之外被调用时，就会形成闭包。</span></p>
+<p align="center"><img src="https://img2018.cnblogs.com/blog/1585158/201903/1585158-20190305164304068-868605781.png" alt="" /></p>
+<p align="center"><span style="font-size: 13px;">图4.1</span></p>
+<p align="justify"><span style="font-family: 宋体;">　　如上图所示，给函数原型增加一个方法，同时创建一个实例，会得到结果</span>3.14159<span style="font-family: 宋体;">。</span></p>
+<p align="justify"><span style="font-family: 宋体;"><img src="https://img2018.cnblogs.com/blog/1585158/201903/1585158-20190305164322090-192449816.png" alt="" style="display: block; margin-left: auto; margin-right: auto;" /></span></p>
+<p align="center"><span style="font-size: 13px;">&nbsp;&nbsp;<span style="font-family: 宋体;">图</span>4.2</span></p>
+<p align="justify"><span style="font-family: 宋体;">　　上图就是把一个函数</span>return<span style="font-family: 宋体;">为一个变量，那么当创建该函数的实例的时候，所有该变量具有的方法都可以被调用，同时还是在函数作用域之外被调用，即闭包，结果依旧为</span>3.14159<span style="font-family: 宋体;">。</span></p>
+<p style="text-align: center;" align="justify"><img src="https://img2018.cnblogs.com/blog/1585158/201903/1585158-20190305164459157-896201755.png" alt="" /></p>
+<p style="text-align: center;" align="justify"><span style="font-size: 13px;">图4.3</span></p>
+<p align="justify"><span style="font-family: 宋体;">这属于最容易理解的方式，即直接</span>new<span style="font-family: 宋体;">一个对象，给它赋予各种属性和方法，最终结果依旧为</span><span style="font-family: 'Calibri Light';">3.14159</span><span style="font-family: 宋体;">。</span></p>
+<p align="center"><span style="font-family: 宋体;"><img src="https://img2018.cnblogs.com/blog/1585158/201903/1585158-20190305164604546-1830244593.png" alt="" /></span></p>
+<p align="center"><span style="font-family: 宋体;">图</span>4.4</p>
+<p align="justify"><span style="font-family: 宋体;">　　这种方式是使用最多的一种方式，也是最方便的一种方式。（</span>var obj = {}<span style="font-family: 宋体;">就是声明一个空的对象。</span><span style="font-family: 宋体;">）</span></p>
+<p align="justify"><span style="font-family: 宋体;">　　闭包的用途如下：</span></p>
+<ol>
+<li><span style="font-family: 宋体;">函数只需要执行一次，其内部变量无需维护，</span><span style="font-family: 宋体;">比如</span>UI<span style="font-family: 宋体;">的初始化</span><span style="font-family: 宋体;">；</span></li>
+<li><span style="font-family: 宋体;">前端缓存。假设有一个很耗性能和时间的函数对象，每次调用都需要很久的时间，</span><span style="font-family: 宋体;">那么我们就需要将计算出来的值存储起来，当调用这个函数的时候，首先在缓存中查找，如果找不到，则进行计算，然后更新缓存并返回值，如果找到了，直接返回查找到的值即可。闭包正是可以做到这一点，因为它不会释放外部的引用，从而函数内部的值可以得以保留。</span></li>
+<li><span style="font-family: 宋体;">封装函数（组件化）</span></li>
+<li><span style="font-family: 宋体;">实现类和继承（参考第一种写法）</span></li>
+</ol>
+<p align="justify">五.&nbsp;<strong>call<span style="font-family: 宋体;">与</span><span style="font-family: Calibri;">apply</span></strong></p>
+<ol>
+<li>共同点</li>
+</ol>
+<p align="justify"><span style="font-family: 宋体;">　　都</span>&ldquo;<span style="font-family: 宋体;">可以用来代替另一个对象调用一个方法，将一个函数的对象上下文从初始的上下文改变为由</span><span style="font-family: Calibri;">thisObj</span><span style="font-family: 宋体;">指定的新对象</span><span style="font-family: Calibri;">&rdquo;</span><span style="font-family: 宋体;">。</span></p>
+<ol>
+<li>不同点</li>
+</ol>
+<p align="justify">　　apply<span style="font-family: 宋体;">：</span>apply(thisObj<span style="font-family: 宋体;">，</span><span style="font-family: Arial;">[argArray])</span><span style="font-family: 宋体;">。</span><span style="font-family: 宋体;">最多只能有两个参数</span>&mdash;&mdash;<span style="font-family: 宋体;">新</span><span style="font-family: Calibri;">this</span><span style="font-family: 宋体;">对象和一个数组</span><span style="font-family: Calibri;">argArray</span><span style="font-family: 宋体;">。如果给该方法传递多个参数，则把参数都写进这个数组里面，当然，即使只有一个参数，也要写进数组里。如果</span><span style="font-family: Calibri;">argArray</span><span style="font-family: 宋体;">不是一个有效的数组或</span><span style="font-family: Calibri;">arguments</span><span style="font-family: 宋体;">对象，那么将导致一个</span><span style="font-family: Calibri;">TypeError</span><span style="font-family: 宋体;">。如果没有提供</span><span style="font-family: Calibri;">argArray</span><span style="font-family: 宋体;">和</span><span style="font-family: Calibri;">thisObj</span><span style="font-family: 宋体;">任何一个参数，那么</span><span style="font-family: Calibri;">Global</span><span style="font-family: 宋体;">对象将被用作</span><span style="font-family: Calibri;">thisObj</span><span style="font-family: 宋体;">，并且无法被传递任何参数。</span></p>
+<p align="justify">　　call<span style="font-family: 宋体;">：</span>call(thisObj<span style="font-family: 宋体;">，</span><span style="font-family: Arial;">Object)</span><span style="font-family: 宋体;">。</span><span style="font-family: 宋体;">它可以接受多个参数，第一个参数与</span>apply<span style="font-family: 宋体;">一样，后面则是一串参数列表。这个方法主要用在</span><span style="font-family: Calibri;">js</span><span style="font-family: 宋体;">对象各方法相互调用的时候，使当前</span><span style="font-family: Calibri;">this</span><span style="font-family: 宋体;">实例指针保持一致，或者在特殊情况下需要改变</span><span style="font-family: Calibri;">this</span><span style="font-family: 宋体;">指针。如果没有提供</span><span style="font-family: Calibri;">thisObj</span><span style="font-family: 宋体;">参数，那么 </span><span style="font-family: Calibri;">Global </span><span style="font-family: 宋体;">对象被用作</span><span style="font-family: Calibri;">thisObj</span><span style="font-family: 宋体;">。 </span></p>
+<p align="center"><span style="font-family: 宋体;"><img src="https://img2018.cnblogs.com/blog/1585158/201903/1585158-20190305164628448-1800687919.png" alt="" /></span></p>
+<p align="center"><span style="font-family: 宋体;">图</span>5.1</p>
+<p align="justify"><span style="font-family: 宋体;">　　如上图所示，无论是</span>apply<span style="font-family: 宋体;">还是</span><span style="font-family: Calibri;">call</span><span style="font-family: 宋体;">，它的结果都是一样的，都是调用的前面的函数的方法，但是传的参数是不一样的，当然这只是在参数方面的不同。</span></p>
+<p align="center"><span style="font-family: 宋体;"><img src="https://img2018.cnblogs.com/blog/1585158/201903/1585158-20190305164637016-1919590125.png" alt="" /></span></p>
+<p align="center"><span style="font-family: 宋体;">图</span>5.2</p>
+<p><span style="font-family: 宋体;">　　如上，就是利用</span>call<span style="font-family: 宋体;">和</span><span style="font-family: Calibri;">apply</span><span style="font-family: 宋体;">实现继承，通过给函数赋予属性和方法，然后给另一个函数继承原函数，再创建新函数的实例，就实现了最简单的继承。</span></p>
+<p><img src="https://img2018.cnblogs.com/blog/1585158/201903/1585158-20190305164643503-40524234.png" alt="" style="display: block; margin-left: auto; margin-right: auto;" /></p>
+<p style="text-align: center;">　　图5.3</p>
+<p align="justify">　　如上图所示，即一种多重继承的实现方式。</p>
+<p>&nbsp;</p>
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/09/16/jsThree/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">&lt;</strong>
+      <div class="article-nav-title">
+        
+          个人JS体系整理（三）
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/07/16/jsOne/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">个人JS体系完善（一）</div>
+      <strong class="article-nav-caption">&gt;</strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+      <div class="footer-left">
+        &copy; 2020 Jerome Zhang
+      </div>
+        <div class="footer-right">
+          <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/smackgg/hexo-theme-smackdown" target="_blank">Smackdown</a>
+        </div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+
+<script src="/js/main.js"></script>
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js"></script>
+
+
+  </div>
+</body>
+</html>
